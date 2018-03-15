@@ -37,6 +37,11 @@ import top.liumingyi.ciel.RxBus;
 public abstract class BaseActivity extends AppCompatActivity {
 
   /**
+   * 默认适配status bar
+   */
+  private static final boolean NEED_ADAPTION_STATUS_BAR_DEFAULT = true;
+
+  /**
    * 输入法管理对象
    */
   private InputMethodManager inputMethodManager;
@@ -51,17 +56,34 @@ public abstract class BaseActivity extends AppCompatActivity {
    */
   private Disposable rxBusSubscribe;
 
+  /**
+   * 是否需要适配status bar(顶部状态栏),默认true
+   */
+  private boolean needAdaption = NEED_ADAPTION_STATUS_BAR_DEFAULT;
+
+  protected void setNotAdaptionStatusBar() {
+    this.needAdaption = false;
+  }
+
   @Override protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    configureBeforeSetContentView();
     setContentView(getLayoutResID());
     inject();
     initVariables();
     initViews(savedInstanceState);
   }
 
+  /**
+   * 需要在setContentView之前进行的配置
+   */
+  protected void configureBeforeSetContentView() {
+
+  }
+
   @Override public void setContentView(@LayoutRes int layoutResID) {
     super.setContentView(layoutResID);
-    //adaptation();
+    adaptation();
     bindViews();
   }
 
@@ -95,7 +117,10 @@ public abstract class BaseActivity extends AppCompatActivity {
   /**
    * 适配,Android 5.0 以上渲染 status bar
    */
-  private void adaptation() {
+  protected void adaptation() {
+    if (!needAdaption) {
+      return;
+    }
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
       //使statusBar透明
       getWindow().setStatusBarColor(Color.TRANSPARENT);
@@ -156,7 +181,7 @@ public abstract class BaseActivity extends AppCompatActivity {
   protected void replaceFragment(Fragment fragment, int resId, String tag) {
     FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
     fragmentTransaction.replace(resId, fragment, tag);
-    fragmentTransaction.addToBackStack(null);
+    fragmentTransaction.addToBackStack(tag);
     fragmentTransaction.commit();
   }
 

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+  <android.support.constraint.ConstraintLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      >
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginStart="32dp"
+        android:src="@drawable/ic_home_black_24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/wish_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="32dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/wish_day"
+        android:textColor="@color/black_45"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@id/imageView"
+        app:layout_constraintTop_toTopOf="@id/imageView"
+        />
+
+    <TextView
+        android:id="@+id/wish_age_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="32dp"
+        android:textColor="@color/black_45"
+        android:textSize="36sp"
+        app:layout_constraintBaseline_toBaselineOf="@id/wish_tv"
+        app:layout_constraintStart_toEndOf="@id/wish_tv"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/age_cn"
+        android:textColor="@color/black_45"
+        android:textSize="18sp"
+        app:layout_constraintBaseline_toBaselineOf="@id/wish_age_tv"
+        app:layout_constraintStart_toEndOf="@id/wish_age_tv"
+        />
+
+    <TextView
+        android:id="@+id/title_birthday_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/title_birthday"
+        android:textColor="@color/black_45"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@id/imageView"
+        app:layout_constraintTop_toBottomOf="@id/imageView"
+        />
+
+    <TextView
+        android:id="@+id/birthday_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:textColor="@color/black_45"
+        android:textSize="24sp"
+        app:layout_constraintBaseline_toBaselineOf="@id/title_birthday_tv"
+        app:layout_constraintStart_toEndOf="@id/title_birthday_tv"
+        />
+
+    <TextView
+        android:id="@+id/title_forever_day_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/title_forever_day"
+        android:textColor="@color/black_45"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@id/title_birthday_tv"
+        app:layout_constraintTop_toBottomOf="@id/title_birthday_tv"
+        />
+
+    <TextView
+        android:id="@+id/forever_day_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:textColor="@color/black_45"
+        android:textSize="24sp"
+        app:layout_constraintBaseline_toBaselineOf="@id/title_forever_day_tv"
+        app:layout_constraintStart_toEndOf="@id/title_forever_day_tv"
+        />
+
+    <TextView
+        android:id="@+id/past_days_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textSize="18sp"
+        app:layout_constraintLeft_toLeftOf="@id/title_forever_day_tv"
+        app:layout_constraintTop_toBottomOf="@id/title_forever_day_tv"
+        />
+
+  </android.support.constraint.ConstraintLayout>
+</ScrollView>

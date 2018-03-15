@@ -1,6 +1,7 @@
 package top.liumingyi.ciel.utils;
 
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 /**
  * 时间处理工具类
@@ -18,9 +19,26 @@ public class TimeUtils {
     }
 
     int count = 0;
-    while (isBefore(start, end)) {
+    Calendar startCopy = new GregorianCalendar(start.get(Calendar.YEAR), start.get(Calendar.MONTH),
+        start.get(Calendar.DAY_OF_MONTH));
+    while (isBefore(startCopy, end)) {
       count++;
-      start.add(Calendar.DATE, 1);
+      startCopy.add(Calendar.DATE, 1);
+    }
+    return count;
+  }
+
+  public static int calculateApartDaysSign(Calendar start, Calendar end) {
+    if (isBefore(end, start)) {
+      return 0 - calculateApartDays(end, start);
+    }
+
+    int count = 0;
+    Calendar startCopy = new GregorianCalendar(start.get(Calendar.YEAR), start.get(Calendar.MONTH),
+        start.get(Calendar.DAY_OF_MONTH));
+    while (isBefore(startCopy, end)) {
+      count++;
+      startCopy.add(Calendar.DATE, 1);
     }
     return count;
   }
@@ -55,9 +73,29 @@ public class TimeUtils {
     }
   }
 
-  private static boolean isSameDay(Calendar start, Calendar end) {
+  public static boolean isSameDay(Calendar start, Calendar end) {
     return start.get(Calendar.YEAR) == end.get(Calendar.YEAR)
         && start.get(Calendar.MONTH) == end.get(Calendar.MONTH)
         && start.get(Calendar.DAY_OF_MONTH) == end.get(Calendar.DAY_OF_MONTH);
+  }
+
+  /**
+   * month : 0 ~ 11 #JANUARY# which is 0.
+   */
+  public static boolean isBigMonth(int month) {
+    if (month <= 6) {
+      return month % 2 == 0;
+    } else {
+      return month % 2 == 1;
+    }
+  }
+
+  /**
+   * 是否是闰年
+   */
+  public static boolean isLeapYear(int year) {
+    //普通年(不能被100整除的年份)能被4整除的为闰年。(如2004年就是闰年,1999年不是闰年)
+    //世纪年(能被100整除的年份)能被400整除的是闰年。(如2000年是闰年，1900年不是闰年)
+    return (year % 100 != 0 && year % 4 == 0) || (year % 100 == 0 && year % 400 == 0);
   }
 }

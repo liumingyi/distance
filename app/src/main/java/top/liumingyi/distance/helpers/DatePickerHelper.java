@@ -24,8 +24,8 @@ import lombok.Getter;
 
 public final class DatePickerHelper {
 
-  //年限范围前后20年
-  private static final int YEAR_RANGE = 20;
+  //年限范围前后xx年
+  private static final int YEAR_RANGE = 120;
   //总共41年
   private static final int YEAR_TOTAL = YEAR_RANGE * 2 + 1;
 

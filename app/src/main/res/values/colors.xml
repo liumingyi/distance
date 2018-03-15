@@ -3,4 +3,7 @@
   <color name="colorPrimary">#3F51B5</color>
   <color name="colorPrimaryDark">#303F9F</color>
   <color name="colorAccent">#FF4081</color>
+  <color name="black_45">#515151</color>
+  <color name="green_66d9a9">#66d9a9</color>
+  <color name="status_bar_color">#454545</color>
 </resources>

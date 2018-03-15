@@ -10,7 +10,7 @@ import android.support.annotation.Nullable;
 
 public abstract class BaseViewModelFragment<T extends BaseViewModel> extends BaseFragment {
 
-  private T viewModel;
+  protected T viewModel;
 
   @Override public void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);

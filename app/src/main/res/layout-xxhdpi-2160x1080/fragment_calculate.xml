@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+  <TextView
+      android:id="@+id/today_tv"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="32dp"
+      android:textSize="28sp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      />
+
+  <NumberPicker
+      android:id="@+id/month_picker"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="64dp"
+      android:descendantFocusability="blocksDescendants"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/today_tv"
+      />
+
+  <NumberPicker
+      android:id="@+id/year_picker"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:descendantFocusability="blocksDescendants"
+      app:layout_constraintEnd_toStartOf="@id/month_picker"
+      app:layout_constraintTop_toTopOf="@id/month_picker"
+      />
+
+  <NumberPicker
+      android:id="@+id/day_picker"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:descendantFocusability="blocksDescendants"
+      app:layout_constraintStart_toEndOf="@id/month_picker"
+      app:layout_constraintTop_toTopOf="@id/month_picker"
+      />
+
+  <TextView
+      android:id="@+id/apart_days_tv"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_above="@id/calculate_btn"
+      android:layout_marginTop="64dp"
+      android:textSize="28sp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/day_picker"
+      />
+
+  <Button
+      android:id="@+id/calculate_btn"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="@drawable/bg_gray"
+      android:text="@string/calculate"
+      android:textAllCaps="false"
+      android:textSize="13sp"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      />
+
+</android.support.constraint.ConstraintLayout>
+

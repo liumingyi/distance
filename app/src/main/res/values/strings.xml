@@ -1,6 +1,25 @@
 <resources>
-  <string name="app_name">距离</string>
-  <string name="calculate">Calculate</string>
+  <string name="app_name">第几天</string>
+  <string name="calculate">算一算</string>
   <string name="apart_days">%1$d&#160;天</string>
   <string name="is_today">就在今天</string>
+  <string name="title_calculate">计算</string>
+  <string name="title_account">我</string>
+  <string name="title_birthday">出生日:</string>
+  <string name="wish_day">我想活到</string>
+  <string name="age_cn">岁</string>
+  <string name="title_forever_day">永恒日:</string>
+  <string name="label_birthday">生日:</string>
+  <string name="label_wish_age">我想活到</string>
+  <string name="age_unit">岁</string>
+  <string name="year">年</string>
+  <string name="month">月</string>
+  <string name="date">日</string>
+  <string name="submit">提交</string>
+  <string name="please_complete_birthday">请完善生日</string>
+  <string name="please_input_wish_age">说说看，你想活多久？\n10000岁怎么样?</string>
+  <string name="year_too_early">您的长寿超出我认知\n好吧，来点有趣的?</string>
+  <string name="please_input_legal_month">月份不要乱填啦</string>
+  <string name="please_input_legal_date">日期不要乱填啦</string>
+  <string name="edit_user_info">编辑我的信息</string>
 </resources>

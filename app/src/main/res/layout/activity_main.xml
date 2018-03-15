@@ -1,68 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
 
-  <TextView
-      android:id="@+id/today_tv"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_centerHorizontal="true"
-      android:layout_marginTop="48dp"
-      android:textSize="28sp"
+  <android.support.v7.widget.Toolbar
+      android:id="@+id/toolbar"
+      android:layout_width="match_parent"
+      android:layout_height="44dp"
+      android:background="@color/black_45"
+      android:visibility="invisible"
       />
 
-  <Button
-      android:id="@+id/calculate_btn"
-      android:layout_width="wrap_content"
+  <FrameLayout
+      android:id="@+id/frame_layout"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_above="@id/navigation"
+      android:layout_below="@id/toolbar"
+      />
+
+  <top.liumingyi.distance.ui.SlideUpView
+      android:id="@+id/slidLayout"
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_alignParentBottom="true"
-      android:layout_centerHorizontal="true"
-      android:layout_marginBottom="56dp"
-      android:onClick="onClickCalculate"
-      android:text="@string/calculate"
-      android:textAllCaps="false"
-      android:textSize="14sp"
+      android:background="#E0E0E0"
+      android:maxHeight="300dp"
       />
 
-  <TextView
-      android:id="@+id/apart_days_tv"
-      android:layout_width="wrap_content"
+  <android.support.design.widget.BottomNavigationView
+      android:id="@+id/navigation"
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_above="@id/calculate_btn"
-      android:layout_centerHorizontal="true"
-      android:layout_marginBottom="30dp"
-      android:textSize="28sp"
-      />
-
-  <NumberPicker
-      android:id="@+id/year_picker"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_alignLeft="@+id/today_tv"
-      android:layout_alignStart="@+id/today_tv"
-      android:layout_below="@+id/today_tv"
-      android:layout_marginTop="65dp"
-      />
-
-  <NumberPicker
-      android:id="@+id/month_picker"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_alignTop="@+id/year_picker"
-      android:layout_toEndOf="@+id/year_picker"
-      android:layout_toRightOf="@+id/year_picker"
-      />
-
-  <NumberPicker
-      android:id="@+id/day_picker"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_alignTop="@id/month_picker"
-      android:layout_toEndOf="@id/month_picker"
-      android:layout_toRightOf="@id/month_picker"
+      android:layout_alignParentBottom="true"
+      android:background="?android:attr/windowBackground"
+      app:menu="@menu/navigation"
       />
 
 </RelativeLayout>

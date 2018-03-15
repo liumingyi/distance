@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="300dp"
+    android:padding="20dp"
+    >
+
+  <TextView
+      android:id="@+id/label_birthday_tv"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/label_birthday"
+      android:textSize="16sp"
+      />
+
+  <EditText
+      android:id="@+id/year_edt"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginLeft="10dp"
+      android:layout_marginStart="10dp"
+      android:inputType="number"
+      android:maxLength="4"
+      android:textSize="24sp"
+      app:layout_constraintBaseline_toBaselineOf="@id/label_birthday_tv"
+      app:layout_constraintStart_toEndOf="@id/label_birthday_tv"
+      />
+
+  <TextView
+      android:id="@+id/year_unit_tv"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginLeft="10dp"
+      android:layout_marginStart="10dp"
+      android:text="@string/year"
+      android:textSize="16sp"
+      app:layout_constraintBaseline_toBaselineOf="@id/year_edt"
+      app:layout_constraintStart_toEndOf="@id/year_edt"
+      />
+
+  <EditText
+      android:id="@+id/month_edt"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginLeft="10dp"
+      android:layout_marginStart="10dp"
+      android:inputType="number"
+      android:maxLength="2"
+      android:textSize="24sp"
+      app:layout_constraintBaseline_toBaselineOf="@id/year_unit_tv"
+      app:layout_constraintStart_toEndOf="@id/year_unit_tv"
+      />
+
+  <TextView
+      android:id="@+id/month_unit_tv"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginLeft="10dp"
+      android:layout_marginStart="10dp"
+      android:text="@string/month"
+      android:textSize="16sp"
+      app:layout_constraintBaseline_toBaselineOf="@id/month_edt"
+      app:layout_constraintStart_toEndOf="@id/month_edt"
+      />
+
+  <EditText
+      android:id="@+id/day_edt"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginLeft="10dp"
+      android:layout_marginStart="10dp"
+      android:inputType="number"
+      android:maxLength="2"
+      android:textSize="24sp"
+      app:layout_constraintBaseline_toBaselineOf="@id/month_unit_tv"
+      app:layout_constraintStart_toEndOf="@id/month_unit_tv"
+      />
+
+  <TextView
+      android:id="@+id/day_unit_tv"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginLeft="10dp"
+      android:layout_marginStart="10dp"
+      android:text="@string/date"
+      android:textSize="16sp"
+      app:layout_constraintBaseline_toBaselineOf="@id/day_edt"
+      app:layout_constraintStart_toEndOf="@id/day_edt"
+      />
+
+  <TextView
+      android:id="@+id/label_wish_age_tv"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="15dp"
+      android:text="@string/label_wish_age"
+      android:textSize="16sp"
+      app:layout_constraintTop_toBottomOf="@id/label_birthday_tv"
+      />
+
+  <EditText
+      android:id="@+id/wish_age_edt"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginLeft="10dp"
+      android:layout_marginStart="10dp"
+      android:layout_marginTop="10dp"
+      android:inputType="number"
+      android:textSize="24sp"
+      app:layout_constraintBaseline_toBaselineOf="@id/label_wish_age_tv"
+      app:layout_constraintStart_toEndOf="@id/label_wish_age_tv"
+      />
+
+  <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginLeft="10dp"
+      android:layout_marginStart="10dp"
+      android:text="@string/age_unit"
+      android:textSize="16sp"
+      app:layout_constraintBaseline_toBaselineOf="@id/wish_age_edt"
+      app:layout_constraintStart_toEndOf="@id/wish_age_edt"
+      />
+
+  <Button
+      android:id="@+id/user_info_submit_btn"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="@string/submit"
+      android:textAllCaps="false"
+      app:layout_constraintBottom_toBottomOf="parent"
+      />
+
+
+</android.support.constraint.ConstraintLayout>

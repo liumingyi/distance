@@ -1,25 +1,33 @@
-package top.liumingyi.distance;
+package top.liumingyi.distance.ui;
 
 import android.arch.lifecycle.Observer;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.view.View;
+import android.widget.Button;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 import butterknife.BindView;
-import top.liumingyi.ciel.base.BaseViewModelActivity;
+import io.reactivex.functions.Consumer;
+import top.liumingyi.ciel.base.BaseViewModelFragment;
+import top.liumingyi.ciel.views.TRxView;
+import top.liumingyi.distance.R;
 import top.liumingyi.distance.viewmodels.MainViewModel;
 
-public class MainActivity extends BaseViewModelActivity<MainViewModel> {
+public class CalculateFragment extends BaseViewModelFragment<MainViewModel> {
 
   @BindView(R.id.today_tv) TextView todayTv;
   @BindView(R.id.year_picker) NumberPicker yearPicker;
   @BindView(R.id.month_picker) NumberPicker monthPicker;
   @BindView(R.id.day_picker) NumberPicker dayPicker;
   @BindView(R.id.apart_days_tv) TextView apartDaysTv;
+  @BindView(R.id.calculate_btn) Button calculateBtn;
+
+  public static CalculateFragment newInstance() {
+    return new CalculateFragment();
+  }
 
   @Override protected MainViewModel initInjector() {
-    return new MainViewModel(this);
+    return new MainViewModel(getContext());
   }
 
   @Override protected void dataBinding() {
@@ -60,15 +68,24 @@ public class MainActivity extends BaseViewModelActivity<MainViewModel> {
   }
 
   @Override public int getLayoutResID() {
-    return R.layout.activity_main;
+    return R.layout.fragment_calculate;
   }
 
   @Override public void initVariables() {
 
   }
 
-  @Override public void initViews(Bundle savedInstanceState) {
+  @Override protected void initView(Bundle savedInstanceState) {
     initDatePickers();
+    initListeners();
+  }
+
+  private void initListeners() {
+    TRxView.clicks(calculateBtn).subscribe(new Consumer<Object>() {
+      @Override public void accept(Object o) throws Exception {
+        viewModel.calculateDays();
+      }
+    });
   }
 
   private void initDatePickers() {
@@ -110,12 +127,5 @@ public class MainActivity extends BaseViewModelActivity<MainViewModel> {
     }
 
     picker.setValue(index);
-  }
-
-  /**
-   * 开始计算相距时间
-   */
-  public void onClickCalculate(View view) {
-    viewModel.calculateDays();
   }
 }
