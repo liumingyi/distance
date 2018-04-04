@@ -40,7 +40,7 @@ public class UserFormViewModel extends BaseViewModel {
   @Getter MutableLiveData<User> dataInitLiveData = new MutableLiveData<>();
 
   private int year;
-  private int month;
+  private int month;//从1开始
   private int date;
   private int wishAge;
 
@@ -90,11 +90,15 @@ public class UserFormViewModel extends BaseViewModel {
   }
 
   private void saveUserInfo() {
-    UserInfoSaver saver = new UserInfoSaver(context.get());
-    User user = new User(year, month, date, wishAge);
-    saver.saveUserInfo(user);
-    callbackLiveData.setValue(TAG_FINISH);
-    RxBus.getDefault().send(new UpdateUserInfoEvent(user));
+    new Thread(new Runnable() {
+      @Override public void run() {
+        UserInfoSaver saver = new UserInfoSaver(context.get());
+        User user = new User(year, month, date, wishAge);
+        saver.saveUserInfo(user);
+        callbackLiveData.setValue(TAG_FINISH);
+        RxBus.getDefault().send(new UpdateUserInfoEvent(user));
+      }
+    }).run();
   }
 
   private boolean checkInputs() {

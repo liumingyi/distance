@@ -8,6 +8,7 @@ import java.util.GregorianCalendar;
 import top.liumingyi.ciel.utils.TimeUtils;
 import top.liumingyi.distance.data.User;
 import top.liumingyi.distance.helpers.UserInfoSaver;
+import top.liumingyi.distance.viewmodels.UserViewModel;
 
 /**
  * 为{@link top.liumingyi.distance.viewmodels.UserViewModel}提供数据
@@ -43,7 +44,7 @@ public class UserRepository {
     Calendar current = new GregorianCalendar();
     Calendar deathDay = new GregorianCalendar(birthYear + wishAge, birthMonth - 1, birthDayOfMonth);
 
-    boolean isAlive = isAlive(deathDay);
+    boolean isAlive = user.isAlive();
 
     String message;
 
@@ -59,6 +60,7 @@ public class UserRepository {
         message = "距离我出生还有" + Math.abs(pastDays) + "天";
       }
     } else {
+      // 已去世
       int pastDays = TimeUtils.calculateApartDaysSign(birthday, current);
       int daysOfLife = TimeUtils.calculateApartDays(birthday, deathDay);
 
@@ -74,17 +76,11 @@ public class UserRepository {
     return message;
   }
 
-  private boolean isAlive(Calendar deathDay) {
-    Calendar current = new GregorianCalendar();
-    int currentYear = current.get(Calendar.YEAR);
-    int currentMonth = current.get(Calendar.MONTH);
-    int currentDayOfMonth = current.get(Calendar.DAY_OF_MONTH);
-
-    int deathYear = deathDay.get(Calendar.YEAR);
-    int deathMonth = deathDay.get(Calendar.MONTH);
-    int deathDayOfMonth = deathDay.get(Calendar.DAY_OF_MONTH);
-
-    return currentYear < deathYear || currentYear == deathYear && (currentMonth < deathMonth
-        || currentMonth == deathMonth && currentDayOfMonth < deathDayOfMonth);
+  public UserViewModel.LifeFormViewData generateLifeFormViewData(User user) {
+    UserViewModel.LifeFormViewData data = new UserViewModel.LifeFormViewData();
+    data.isAlive = user.isAlive();
+    data.totalYear = user.getWishAge();
+    data.progressYear = new GregorianCalendar().get(Calendar.YEAR) - user.getBirthYear();
+    return data;
   }
 }

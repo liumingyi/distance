@@ -17,6 +17,13 @@ public class UserViewModel extends BaseViewModel {
 
   @Getter private MutableLiveData<User> userInfoLiveData = new MutableLiveData<>();
   @Getter private MutableLiveData<String> describeMessageLiveData = new MutableLiveData<>();
+  @Getter private MutableLiveData<LifeFormViewData> lifeFormViewData = new MutableLiveData<>();
+
+  public static class LifeFormViewData {
+    public boolean isAlive;
+    public int totalYear;
+    public int progressYear;
+  }
 
   private UserRepository repository;
 
@@ -26,9 +33,7 @@ public class UserViewModel extends BaseViewModel {
 
   @Override public void init(Bundle bundle) {
     User user = fetchUserInfo();
-    if (user == null) {
-      requestForUserInfo();
-    } else {
+    if (user != null) {
       updateUserInfo(user);
     }
   }
@@ -36,14 +41,11 @@ public class UserViewModel extends BaseViewModel {
   public void updateUserInfo(User user) {
     userInfoLiveData.setValue(user);
     describeMessageLiveData.setValue(repository.generateDescribeMessage(user));
+    lifeFormViewData.setValue(repository.generateLifeFormViewData(user));
   }
 
   private User fetchUserInfo() {
     return repository.fetchUserInfo();
-  }
-
-  private void requestForUserInfo() {
-    //没有用户信息
   }
 
   @Override public void onStart() {

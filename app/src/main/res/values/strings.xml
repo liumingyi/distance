@@ -22,4 +22,7 @@
   <string name="please_input_legal_month">月份不要乱填啦</string>
   <string name="please_input_legal_date">日期不要乱填啦</string>
   <string name="edit_user_info">编辑我的信息</string>
+  <string name="life_form_instruction">表格:%1$d x %2$d , 每一格表示%3$d年</string>
+  <string name="end">终点</string>
+  <string name="next_life">下辈子</string>
 </resources>

@@ -80,6 +80,9 @@ public class MainActivity extends DistanceBaseActivity {
     initContentFragments();
     initUserFormFragment();
     checkUserInfo();
+
+    // TODO: 2018/4/4 For Test
+    navigationView.setSelectedItemId(R.id.navigation_user);
   }
 
   private void initContentFragments() {
