@@ -5,15 +5,17 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.TextView;
 import butterknife.BindView;
 import io.reactivex.Observable;
 import io.reactivex.functions.Consumer;
 import java.util.concurrent.TimeUnit;
 import top.liumingyi.ciel.utils.DensityUtils;
+import top.liumingyi.ciel.views.TRxView;
 import top.liumingyi.distance.R;
 import top.liumingyi.distance.events.CloseUserFormEvent;
-import top.liumingyi.distance.events.OpenUserFormEvent;
 import top.liumingyi.distance.helpers.UserInfoSaver;
 
 /**
@@ -34,6 +36,9 @@ public class MainActivity extends DistanceBaseActivity {
 
   @BindView(R.id.slidLayout) SlideUpView slideUpView;
   @BindView(R.id.navigation) BottomNavigationView navigationView;
+  @BindView(R.id.toolbar) Toolbar toolbar;
+
+  TextView toolbarEditTv;
 
   private BottomNavigationView.OnNavigationItemSelectedListener navigationItemSelectedListener =
       new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -56,8 +61,6 @@ public class MainActivity extends DistanceBaseActivity {
   @Override protected void rxBusEventReceive(Object event) {
     if (event instanceof CloseUserFormEvent) {
       slideUpView.down();
-    } else if (event instanceof OpenUserFormEvent) {
-      slideUpView.up();
     }
   }
 
@@ -74,15 +77,44 @@ public class MainActivity extends DistanceBaseActivity {
   }
 
   @Override public void initViews(Bundle savedInstanceState) {
-    navigationView.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
-    slideUpView.bringToFront();
-    slideUpView.setExtraHeight(DensityUtils.dip2px(this, 49));//底部导航栏高度，直接写死了
+    initToolbar();
+    initNavigationView();
+    initSlideUpView();
     initContentFragments();
     initUserFormFragment();
     checkUserInfo();
+  }
 
-    // TODO: 2018/4/4 For Test
-    navigationView.setSelectedItemId(R.id.navigation_user);
+  private void initSlideUpView() {
+    slideUpView.bringToFront();
+    slideUpView.setExtraHeight(DensityUtils.dip2px(this, 49));//底部导航栏高度，直接写死了
+    slideUpView.setOpenStateChangeListener(new SlideUpView.StateChangeListener() {
+      @Override public void open() {
+        if (toolbarEditTv != null) {
+          toolbarEditTv.setText(getString(R.string.cancel));
+        }
+      }
+
+      @Override public void closed() {
+        if (toolbarEditTv != null) {
+          toolbarEditTv.setText(getString(R.string.edit));
+        }
+      }
+    });
+  }
+
+  private void initNavigationView() {
+    navigationView.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
+  }
+
+  private void initToolbar() {
+    getLayoutInflater().inflate(R.layout.my_toolbar, toolbar);
+    toolbarEditTv = toolbar.findViewById(R.id.toolbar_edit_tv);
+    TRxView.clicks(toolbarEditTv).subscribe(new Consumer<Object>() {
+      @Override public void accept(Object o) throws Exception {
+        slideUpView.toggle();
+      }
+    });
   }
 
   private void initContentFragments() {

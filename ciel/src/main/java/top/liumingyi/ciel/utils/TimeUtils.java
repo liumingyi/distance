@@ -1,7 +1,7 @@
 package top.liumingyi.ciel.utils;
 
 import java.util.Calendar;
-import java.util.GregorianCalendar;
+import java.util.concurrent.TimeUnit;
 
 /**
  * 时间处理工具类
@@ -13,13 +13,24 @@ public class TimeUtils {
   /**
    * 计算两个日期相距的天数
    */
-  public static int calculateApartDays(Calendar start, Calendar end) {
+  public static long calculateApartDays(Calendar start, Calendar end) {
     if (isBefore(end, start)) {
       return calculateApartDays(end, start);
     }
+    long apartMillis = end.getTimeInMillis() - start.getTimeInMillis();
+    //使用毫秒精度过高，会因为1毫秒的误差而多或少计算一天!
+    long apartSecond = (long) Math.ceil((double) apartMillis / 1000);
+    return TimeUnit.SECONDS.toDays(apartSecond);
+  }
+
+  @Deprecated public static long calculateApartDaysOld(Calendar start, Calendar end) {
+    if (isBefore(end, start)) {
+      return calculateApartDaysOld(end, start);
+    }
 
     int count = 0;
-    Calendar startCopy = new GregorianCalendar(start.get(Calendar.YEAR), start.get(Calendar.MONTH),
+    Calendar startCopy = Calendar.getInstance();
+    startCopy.set(start.get(Calendar.YEAR), start.get(Calendar.MONTH),
         start.get(Calendar.DAY_OF_MONTH));
     while (isBefore(startCopy, end)) {
       count++;
@@ -28,19 +39,9 @@ public class TimeUtils {
     return count;
   }
 
-  public static int calculateApartDaysSign(Calendar start, Calendar end) {
-    if (isBefore(end, start)) {
-      return 0 - calculateApartDays(end, start);
-    }
-
-    int count = 0;
-    Calendar startCopy = new GregorianCalendar(start.get(Calendar.YEAR), start.get(Calendar.MONTH),
-        start.get(Calendar.DAY_OF_MONTH));
-    while (isBefore(startCopy, end)) {
-      count++;
-      startCopy.add(Calendar.DATE, 1);
-    }
-    return count;
+  public static long calculateApartDaysSign(Calendar start, Calendar end) {
+    return isBefore(end, start) ? 0 - calculateApartDays(end, start)
+        : calculateApartDays(start, end);
   }
 
   /**

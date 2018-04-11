@@ -6,7 +6,6 @@ import android.os.Bundle;
 import java.lang.ref.WeakReference;
 import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Locale;
 import lombok.Getter;
 import top.liumingyi.ciel.base.BaseViewModel;
 import top.liumingyi.ciel.utils.TimeUtils;
@@ -127,17 +126,15 @@ public class MainViewModel extends BaseViewModel {
    */
   public void calculateDays() {
     Calendar target = helper.getCalendar(yearData.index, monthData.index, dayData.index);
-    //Logger.d("target -> " + target.getTime());
-    Calendar now = Calendar.getInstance(Locale.CHINA);
-    //Logger.d("today -> " + now.getTime());
-    int days = TimeUtils.calculateApartDays(now, target);
+    Calendar now = Calendar.getInstance();
+    long days = TimeUtils.calculateApartDays(now, target);
     notifyCalculateResult(days);
   }
 
   /**
    * 通知计算结果
    */
-  private void notifyCalculateResult(int days) {
+  private void notifyCalculateResult(long days) {
     String result;
     if (days == 0) {
       result = context.get().getString(R.string.is_today);

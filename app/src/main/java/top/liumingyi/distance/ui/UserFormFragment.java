@@ -112,7 +112,7 @@ public class UserFormFragment extends BaseViewModelFragment<UserFormViewModel> {
             ToastUtils.showLong(getContext(), R.string.please_input_wish_age);
             wishAgeEdt.findFocus();
             break;
-          case UserFormViewModel.TAG_FINISH:
+          case UserFormViewModel.TAG_USERINFO_SUBMITTED:
             RxBus.getDefault().send(new CloseUserFormEvent());
             break;
         }

@@ -5,7 +5,6 @@ import android.content.Context;
 import android.os.Bundle;
 import java.lang.ref.WeakReference;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 import lombok.Getter;
 import top.liumingyi.ciel.RxBus;
 import top.liumingyi.ciel.base.BaseViewModel;
@@ -32,7 +31,7 @@ public class UserFormViewModel extends BaseViewModel {
 
   public static final int TAG_WISH_AGE_MISSING = 40;
 
-  public static final int TAG_FINISH = 0;
+  public static final int TAG_USERINFO_SUBMITTED = 0;
 
   private static final int YEAR_RANGE = 150;
 
@@ -95,7 +94,7 @@ public class UserFormViewModel extends BaseViewModel {
         UserInfoSaver saver = new UserInfoSaver(context.get());
         User user = new User(year, month, date, wishAge);
         saver.saveUserInfo(user);
-        callbackLiveData.setValue(TAG_FINISH);
+        callbackLiveData.setValue(TAG_USERINFO_SUBMITTED);
         RxBus.getDefault().send(new UpdateUserInfoEvent(user));
       }
     }).run();
@@ -160,7 +159,7 @@ public class UserFormViewModel extends BaseViewModel {
   }
 
   private boolean checkYear() {
-    int currentYear = new GregorianCalendar().get(Calendar.YEAR);
+    int currentYear = Calendar.getInstance().get(Calendar.YEAR);
     if (year <= 0) {
       // 没填
       callbackLiveData.setValue(TAG_YEAR_MISSING);

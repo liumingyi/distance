@@ -21,8 +21,16 @@
   <string name="year_too_early">您的长寿超出我认知\n好吧，来点有趣的?</string>
   <string name="please_input_legal_month">月份不要乱填啦</string>
   <string name="please_input_legal_date">日期不要乱填啦</string>
-  <string name="edit_user_info">编辑我的信息</string>
   <string name="life_form_instruction">表格:%1$d x %2$d , 每一格表示%3$d年</string>
   <string name="end">终点</string>
   <string name="next_life">下辈子</string>
+  <string name="wish_total_day">总共%1$d天</string>
+  <string name="unknown_mark">\?</string>
+  <string name="life_start">美妙人生从今天开始</string>
+  <string name="date_of_life">今天是人生第%1$d天\n生命已经度过%2$s</string>
+  <string name="days_before_born">距离出生还有%1$d天</string>
+  <string name="today_is_death_day">今日即永恒</string>
+  <string name="days_after_dead">已离开%1$d天</string>
+  <string name="edit">编辑</string>
+  <string name="cancel">取消</string>
 </resources>

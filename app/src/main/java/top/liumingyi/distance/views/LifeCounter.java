@@ -42,8 +42,8 @@ class LifeCounter {
   }
 
   private Cell generateEndCell(int column, int row, int totalYear) {
-    int endColumn = column - (row * column - totalYear / scale);
-    return new Cell(endColumn - 1, row - 1);
+    int endColumn = column - (int) Math.floor((double) (row * column * scale - totalYear) / scale);
+    return new Cell(endColumn == 0 ? 0 : endColumn - 1, row == 0 ? 0 : row - 1);
   }
 
   /**

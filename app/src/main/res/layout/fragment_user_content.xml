@@ -32,6 +32,7 @@
         android:text="@string/wish_day"
         android:textColor="@color/black_45"
         android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@id/imageView"
         app:layout_constraintTop_toTopOf="@id/imageView"
         />
@@ -43,6 +44,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="32dp"
+        android:text="@string/unknown_mark"
         android:textColor="@color/black_45"
         android:textSize="32sp"
         app:layout_constraintBaseline_toBaselineOf="@id/wish_tv"
@@ -58,18 +60,31 @@
         android:text="@string/age_cn"
         android:textColor="@color/black_45"
         android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintBaseline_toBaselineOf="@id/wish_age_tv"
         app:layout_constraintStart_toEndOf="@id/wish_age_tv"
+        />
+
+    <TextView
+        android:id="@+id/wish_total_day_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:textColor="@color/black_45"
+        android:textSize="13sp"
+        app:layout_constraintStart_toStartOf="@id/wish_tv"
+        app:layout_constraintTop_toBottomOf="@id/wish_tv"
         />
 
     <TextView
         android:id="@+id/title_birthday_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="24dp"
         android:text="@string/title_birthday"
         android:textColor="@color/black_45"
         android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@id/imageView"
         app:layout_constraintTop_toBottomOf="@id/imageView"
         />
@@ -80,7 +95,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
+        android:text="@string/unknown_mark"
         android:textColor="@color/black_45"
         android:textSize="24sp"
         app:layout_constraintBaseline_toBaselineOf="@id/title_birthday_tv"
@@ -91,10 +106,10 @@
         android:id="@+id/title_forever_day_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
         android:text="@string/title_forever_day"
         android:textColor="@color/black_45"
         android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@id/title_birthday_tv"
         app:layout_constraintTop_toBottomOf="@id/title_birthday_tv"
         />
@@ -105,7 +120,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
+        android:text="@string/unknown_mark"
         android:textColor="@color/black_45"
         android:textSize="24sp"
         app:layout_constraintBaseline_toBaselineOf="@id/title_forever_day_tv"
@@ -117,7 +132,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:textSize="18sp"
+        android:textSize="16sp"
         app:layout_constraintLeft_toLeftOf="@id/title_forever_day_tv"
         app:layout_constraintTop_toBottomOf="@id/title_forever_day_tv"
         />
@@ -128,6 +143,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintTop_toBottomOf="@id/past_days_tv"
         />
 

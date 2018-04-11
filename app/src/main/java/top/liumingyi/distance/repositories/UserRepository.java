@@ -4,8 +4,8 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import java.lang.ref.WeakReference;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 import top.liumingyi.ciel.utils.TimeUtils;
+import top.liumingyi.distance.R;
 import top.liumingyi.distance.data.User;
 import top.liumingyi.distance.helpers.UserInfoSaver;
 import top.liumingyi.distance.viewmodels.UserViewModel;
@@ -40,36 +40,41 @@ public class UserRepository {
     int birthDayOfMonth = user.getBirthDayOfMonth();
     int wishAge = user.getWishAge();
 
-    Calendar birthday = new GregorianCalendar(birthYear, birthMonth - 1, birthDayOfMonth);
-    Calendar current = new GregorianCalendar();
-    Calendar deathDay = new GregorianCalendar(birthYear + wishAge, birthMonth - 1, birthDayOfMonth);
+    Calendar birthday = Calendar.getInstance();
+    birthday.set(birthYear, birthMonth - 1, birthDayOfMonth);
+    Calendar current = Calendar.getInstance();
+    Calendar deathDay = Calendar.getInstance();
+    deathDay.set(birthYear + wishAge, birthMonth - 1, birthDayOfMonth);
 
     boolean isAlive = user.isAlive();
 
     String message;
 
+    long pastDays = TimeUtils.calculateApartDaysSign(birthday, current);
     if (isAlive) {
       // 活着 or 还没出生
-      int pastDays = TimeUtils.calculateApartDaysSign(birthday, current);
       if (pastDays == 0) {
-        message = "美妙人生从今天开始";
+        message = context.get().getString(R.string.life_start);
       } else if (pastDays > 0) {
-        message = "今天是我生命中第" + (pastDays + 1) + "天";
+        float percent =
+            (float) (Math.round((float) pastDays / user.getWishTotalDays() * 10000) / 100.0);
+        message = String.format(context.get().getString(R.string.date_of_life), pastDays + 1,
+            String.valueOf(percent).concat("%"));
       } else {
         // 天数为负,表示还没有出生
-        message = "距离我出生还有" + Math.abs(pastDays) + "天";
+        message =
+            String.format(context.get().getString(R.string.days_before_born), Math.abs(pastDays));
       }
     } else {
       // 已去世
-      int pastDays = TimeUtils.calculateApartDaysSign(birthday, current);
-      int daysOfLife = TimeUtils.calculateApartDays(birthday, deathDay);
+      long daysOfLife = TimeUtils.calculateApartDays(birthday, deathDay);
 
-      int daysOfLeave = pastDays - daysOfLife;
+      long daysOfLeave = pastDays - daysOfLife;
 
       if (daysOfLeave == 0) {
-        message = "今日即永恒";
+        message = context.get().getString(R.string.today_is_death_day);
       } else {
-        message = "已离开" + daysOfLeave + "天";
+        message = String.format(context.get().getString(R.string.days_after_dead), daysOfLeave);
       }
     }
 
@@ -80,7 +85,7 @@ public class UserRepository {
     UserViewModel.LifeFormViewData data = new UserViewModel.LifeFormViewData();
     data.isAlive = user.isAlive();
     data.totalYear = user.getWishAge();
-    data.progressYear = new GregorianCalendar().get(Calendar.YEAR) - user.getBirthYear();
+    data.progressYear = Calendar.getInstance().get(Calendar.YEAR) - user.getBirthYear();
     return data;
   }
 }

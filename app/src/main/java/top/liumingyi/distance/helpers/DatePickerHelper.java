@@ -6,7 +6,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
 import lombok.Getter;
@@ -54,11 +53,11 @@ public final class DatePickerHelper {
   @Getter private String today;
 
   public DatePickerHelper() {
-    Calendar calendar = new GregorianCalendar();
+    Calendar calendar = Calendar.getInstance();
     currentYear = calendar.get(Calendar.YEAR);
     currentMonth = calendar.get(Calendar.MONTH);
     currentDay = calendar.get(Calendar.DATE);
-    DateFormat dateFormat = new SimpleDateFormat("yyyy年MM月dd日", Locale.CHINA);
+    DateFormat dateFormat = new SimpleDateFormat("yyyy年MM月dd日", Locale.getDefault());
     today = dateFormat.format(calendar.getTime());
   }
 

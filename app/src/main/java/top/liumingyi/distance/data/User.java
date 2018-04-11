@@ -3,7 +3,7 @@ package top.liumingyi.distance.data;
 import android.os.Parcel;
 import android.os.Parcelable;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
+import java.util.concurrent.TimeUnit;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,6 +20,8 @@ import lombok.Setter;
   private String birthday;
   /** 期望的年龄 */
   private int wishAge;
+  /** 期望存活的总天数 */
+  private long wishTotalDays;
   /** 期望的永寂日期 */
   private String wishDate;
 
@@ -31,15 +33,26 @@ import lombok.Setter;
     this.wishAge = wishAge;
     this.wishDate = generateWishDate(year, month, dateOfMonth, wishAge);
     this.isAlive = checkIsAlive(year, month, dateOfMonth);
+    this.wishTotalDays = calculateTotalDays(year, month, dateOfMonth, wishAge);
+  }
+
+  private long calculateTotalDays(int year, int month, int dateOfMonth, int wishAge) {
+    Calendar birthday = Calendar.getInstance();
+    birthday.set(year, month - 1, dateOfMonth);
+    Calendar deathDay = Calendar.getInstance();
+    deathDay.set(year + wishAge, month - 1, dateOfMonth);
+    long totalMillis = deathDay.getTimeInMillis() - birthday.getTimeInMillis();
+    return TimeUnit.MILLISECONDS.toDays(totalMillis);
   }
 
   private boolean checkIsAlive(int year, int month, int dateOfMonth) {
-    Calendar deathDay = new GregorianCalendar(year + wishAge, month - 1, dateOfMonth);
-    Calendar current = new GregorianCalendar();
+    Calendar deathDay = Calendar.getInstance();
+    deathDay.set(year + wishAge, month - 1, dateOfMonth);
+    Calendar current = Calendar.getInstance();
     return current.before(deathDay);
   }
 
-  protected User(Parcel in) {
+  private User(Parcel in) {
     isAlive = in.readByte() != 0;
     birthday = in.readString();
     wishAge = in.readInt();

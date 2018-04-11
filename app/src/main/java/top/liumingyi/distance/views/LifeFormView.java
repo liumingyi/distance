@@ -102,7 +102,7 @@ public class LifeFormView extends View {
     height = cellHeight * row;
     borderRect.right = width + padding;
     borderRect.bottom = height + padding;
-    setMeasuredDimension((int) width, MeasureSpec.getSize(heightMeasureSpec));
+    setMeasuredDimension((int) width, (int) (height + padding + padding + padding + textHeight));
   }
 
   @Override protected void onDraw(Canvas canvas) {
@@ -168,6 +168,9 @@ public class LifeFormView extends View {
 
   private void drawEndCell(Canvas canvas) {
     LifeCounter.Cell endCell = lifeCounter.getEndCell();
+    if (endCell == null) {
+      return;
+    }
     endRect.left = padding + cellWidth * endCell.columnIndex;
     endRect.top = padding + cellWidth * endCell.rowIndex;
     endRect.right = endRect.left + cellWidth;

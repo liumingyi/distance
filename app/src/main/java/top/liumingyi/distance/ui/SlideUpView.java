@@ -8,6 +8,7 @@ public class SlideUpView extends FrameLayout {
 
   private boolean isOpen;
   private int extraHeight;
+  private StateChangeListener listener;
 
   public SlideUpView(Context context) {
     this(context, null);
@@ -37,18 +38,42 @@ public class SlideUpView extends FrameLayout {
   public void up() {
     animate().translationY(-extraHeight).setDuration(200);
     isOpen = true;
+    if (listener != null) {
+      listener.open();
+    }
   }
 
   public void down() {
     animate().translationY(getHeight()).setDuration(200);
     isOpen = false;
+    if (listener != null) {
+      listener.closed();
+    }
   }
 
   public boolean isOpen() {
     return isOpen;
   }
 
+  public void toggle() {
+    if (isOpen) {
+      down();
+    } else {
+      up();
+    }
+  }
+
   public void setExtraHeight(int extraHeight) {
     this.extraHeight = extraHeight;
+  }
+
+  interface StateChangeListener {
+    void open();
+
+    void closed();
+  }
+
+  public void setOpenStateChangeListener(StateChangeListener listener) {
+    this.listener = listener;
   }
 }
