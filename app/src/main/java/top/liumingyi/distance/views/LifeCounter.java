@@ -22,7 +22,6 @@ class LifeCounter {
   @Getter private int scale;
 
   private int totalYear;
-  private int progressYear;
 
   @Getter private int completeRows;
   @Getter private int cellsInLastRow;
@@ -93,13 +92,12 @@ class LifeCounter {
     if (progressYear > totalYear) {
       throw new RuntimeException("progressYear must be smaller than totalYear");
     }
-    this.progressYear = progressYear;
     this.completeRows = progressYear / scale / formColumnNum;
     this.cellsInLastRow = (int) Math.ceil((double) progressYear / scale) % formColumnNum;
   }
 
-  boolean hasExtraCell() {
-    return endCell != null && formColumnNum > endCell.columnIndex + 1;
+  boolean noExtraCell() {
+    return endCell == null || formColumnNum <= endCell.columnIndex + 1;
   }
 
   class Cell {

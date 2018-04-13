@@ -1,8 +1,6 @@
 package top.liumingyi.distance.ui;
 
-import android.arch.lifecycle.Observer;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.TextView;
 import butterknife.BindView;
@@ -57,36 +55,28 @@ public class UserFragment extends BaseViewModelFragment<UserViewModel> {
   }
 
   @Override protected void dataBinding() {
-    viewModel.getUserInfoLiveData().observe(this, new Observer<User>() {
-      @Override public void onChanged(@Nullable User user) {
-        if (user == null) {
-          return;
-        }
-        birthdayTv.setText(user.getBirthday());
-        wishAgeTv.setText(String.valueOf(user.getWishAge()));
-        foreverDayTv.setText(user.getWishDate());
-        wishTotalDayTv.setText(
-            String.format(getString(R.string.wish_total_day), user.getWishTotalDays()));
+    viewModel.getUserInfoLiveData().observe(this, user -> {
+      if (user == null) {
+        return;
       }
+      birthdayTv.setText(user.getBirthday());
+      wishAgeTv.setText(String.valueOf(user.getWishAge()));
+      foreverDayTv.setText(user.getWishDate());
+      wishTotalDayTv.setText(
+          String.format(getString(R.string.wish_total_day), user.getWishTotalDays()));
     });
 
-    viewModel.getDescribeMessageLiveData().observe(this, new Observer<String>() {
-      @Override public void onChanged(@Nullable String msg) {
-        pastDaysTv.setText(msg);
-      }
-    });
+    viewModel.getDescribeMessageLiveData().observe(this, msg -> pastDaysTv.setText(msg));
 
-    viewModel.getLifeFormViewData().observe(this, new Observer<UserViewModel.LifeFormViewData>() {
-      @Override public void onChanged(@Nullable UserViewModel.LifeFormViewData lifeFormViewData) {
-        if (lifeFormViewData == null || !lifeFormViewData.isAlive) {
-          lifeFormView.setVisibility(View.GONE);
-          return;
-        }
-        lifeFormView.setVisibility(View.VISIBLE);
-        lifeFormView.setTotalYear(lifeFormViewData.totalYear);
-        lifeFormView.setProgressYear(lifeFormViewData.progressYear);
-        lifeFormView.invalidate();
+    viewModel.getLifeFormViewData().observe(this, lifeFormViewData -> {
+      if (lifeFormViewData == null || !lifeFormViewData.isAlive) {
+        lifeFormView.setVisibility(View.GONE);
+        return;
       }
+      lifeFormView.setVisibility(View.VISIBLE);
+      lifeFormView.setTotalYear(lifeFormViewData.totalYear);
+      lifeFormView.setProgressYear(lifeFormViewData.progressYear);
+      lifeFormView.invalidate();
     });
   }
 }

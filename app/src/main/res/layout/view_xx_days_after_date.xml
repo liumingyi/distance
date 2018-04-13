@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    >
+
+  <EditText
+      android:id="@+id/year_edt"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:imeOptions="actionNext"
+      android:inputType="numberDecimal"
+      android:maxLines="1"
+      android:textColor="@color/black"
+      android:textSize="24sp"
+      android:textStyle="bold"
+      />
+
+  <TextView
+      android:id="@+id/year_tv"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/year"
+      android:textColor="@color/black_45"
+      android:textSize="18sp"
+      android:textStyle="bold"
+      app:layout_constraintBaseline_toBaselineOf="@id/year_edt"
+      app:layout_constraintLeft_toRightOf="@id/year_edt"
+      />
+
+  <EditText
+      android:id="@+id/month_edt"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:imeOptions="actionNext"
+      android:inputType="numberDecimal"
+      android:maxLines="1"
+      android:textColor="@color/black"
+      android:textSize="24sp"
+      android:textStyle="bold"
+      app:layout_constraintLeft_toRightOf="@id/year_tv"
+      />
+
+  <TextView
+      android:id="@+id/month_tv"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/month"
+      android:textColor="@color/black_45"
+      android:textSize="18sp"
+      android:textStyle="bold"
+      app:layout_constraintBaseline_toBaselineOf="@id/year_edt"
+      app:layout_constraintLeft_toRightOf="@id/month_edt"
+      />
+
+  <EditText
+      android:id="@+id/day_edt"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:imeOptions="actionNext"
+      android:inputType="numberDecimal"
+      android:maxLines="1"
+      android:textColor="@color/black"
+      android:textSize="24sp"
+      android:textStyle="bold"
+      app:layout_constraintLeft_toRightOf="@id/month_tv"
+      />
+
+  <TextView
+      android:id="@+id/day_tv"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/date"
+      android:textColor="@color/black_45"
+      android:textSize="18sp"
+      android:textStyle="bold"
+      app:layout_constraintBaseline_toBaselineOf="@id/year_edt"
+      app:layout_constraintLeft_toRightOf="@id/day_edt"
+      />
+
+
+  <TextView
+      android:id="@+id/de_tv"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/de"
+      android:textColor="@color/black_45"
+      android:textSize="18sp"
+      android:textStyle="bold"
+      app:layout_constraintBaseline_toBaselineOf="@id/intention_days_edt"
+      />
+
+  <EditText
+      android:id="@+id/intention_days_edt"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:imeOptions="actionDone"
+      android:inputType="numberDecimal"
+      android:maxLines="1"
+      android:textColor="@color/black"
+      android:textSize="24sp"
+      android:textStyle="bold"
+      app:layout_constraintLeft_toRightOf="@id/de_tv"
+      app:layout_constraintTop_toBottomOf="@id/year_edt"
+      />
+
+
+  <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginLeft="8dp"
+      android:layout_marginStart="8dp"
+      android:text="@string/day"
+      android:textColor="@color/black_45"
+      android:textSize="18sp"
+      android:textStyle="bold"
+      app:layout_constraintBaseline_toBaselineOf="@id/intention_days_edt"
+      app:layout_constraintStart_toEndOf="@id/intention_days_edt"
+      />
+
+  <TextView
+      android:id="@+id/is_tv"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/is"
+      android:textColor="@color/black_45"
+      android:textSize="18sp"
+      android:textStyle="bold"
+      app:layout_constraintTop_toBottomOf="@id/intention_days_edt"
+      />
+
+  <TextView
+      android:id="@+id/target_date_tv"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginLeft="8dp"
+      android:layout_marginStart="8dp"
+      android:textColor="@color/black"
+      android:textSize="24sp"
+      android:textStyle="bold"
+      app:layout_constraintBaseline_toBaselineOf="@id/is_tv"
+      app:layout_constraintStart_toEndOf="@id/is_tv"
+      />
+
+</android.support.constraint.ConstraintLayout>

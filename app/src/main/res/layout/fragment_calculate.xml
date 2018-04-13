@@ -16,14 +16,16 @@
 
   <Button
       android:id="@+id/calculate_btn"
-      android:layout_width="wrap_content"
+      android:layout_width="240dp"
       android:layout_height="wrap_content"
       android:layout_alignParentBottom="true"
       android:layout_centerHorizontal="true"
       android:layout_marginBottom="56dp"
+      android:background="@drawable/bg_calculate_btn"
       android:text="@string/calculate"
       android:textAllCaps="false"
       android:textSize="14sp"
+      style="?android:borderlessButtonStyle"
       />
 
   <TextView

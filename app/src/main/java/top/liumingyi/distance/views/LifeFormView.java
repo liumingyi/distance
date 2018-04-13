@@ -142,7 +142,7 @@ public class LifeFormView extends View {
     canvas.drawText(endStr, pointRight + instructionPointSize, y, textPaint);
 
     // 灰色图标
-    if (!lifeCounter.hasExtraCell()) {
+    if (lifeCounter.noExtraCell()) {
       return;
     }
     textPaint.getTextBounds(endStr, 0, endStr.length(), textBounds);
@@ -155,7 +155,7 @@ public class LifeFormView extends View {
   }
 
   private void drawUselessCells(Canvas canvas) {
-    if (!lifeCounter.hasExtraCell()) {
+    if (lifeCounter.noExtraCell()) {
       return;
     }
     LifeCounter.Cell endCell = lifeCounter.getEndCell();

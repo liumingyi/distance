@@ -89,14 +89,12 @@ public class UserFormViewModel extends BaseViewModel {
   }
 
   private void saveUserInfo() {
-    new Thread(new Runnable() {
-      @Override public void run() {
-        UserInfoSaver saver = new UserInfoSaver(context.get());
-        User user = new User(year, month, date, wishAge);
-        saver.saveUserInfo(user);
-        callbackLiveData.setValue(TAG_USERINFO_SUBMITTED);
-        RxBus.getDefault().send(new UpdateUserInfoEvent(user));
-      }
+    new Thread(() -> {
+      UserInfoSaver saver = new UserInfoSaver(context.get());
+      User user = new User(year, month, date, wishAge);
+      saver.saveUserInfo(user);
+      callbackLiveData.setValue(TAG_USERINFO_SUBMITTED);
+      RxBus.getDefault().send(new UpdateUserInfoEvent(user));
     }).run();
   }
 
@@ -125,17 +123,17 @@ public class UserFormViewModel extends BaseViewModel {
       // 2月
       if (TimeUtils.isLeapYear(year)) {
         // 闰年 1~29
-        isLegal = date >= 1 && date <= 29;
+        isLegal = date <= 29;
       } else {
         // 平年 1~28
-        isLegal = date >= 1 && date <= 28;
+        isLegal = date <= 28;
       }
     } else if (TimeUtils.isBigMonth(month)) {
       // 大月
-      isLegal = date >= 1 && date <= 31;
+      isLegal = date <= 31;
     } else {
       // 小月
-      isLegal = date >= 1 && date <= 30;
+      isLegal = date <= 30;
     }
 
     if (!isLegal) {
@@ -151,7 +149,7 @@ public class UserFormViewModel extends BaseViewModel {
       return false;
     }
 
-    boolean isLegal = month >= 1 && month <= 12;
+    boolean isLegal = month <= 12;
     if (!isLegal) {
       callbackLiveData.setValue(TAG_MONTH_ILLEGAL);
     }

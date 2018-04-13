@@ -7,4 +7,10 @@
   <color name="green_66d9a9">#66d9a9</color>
   <color name="status_bar_color">#454545</color>
   <color name="white">#ffffff</color>
+  <color name="red">#FF4040</color>
+  <color name="yellow">#EEEE00</color>
+  <color name="green">#c0ff3e</color>
+  <color name="blue">#4169E1</color>
+  <color name="black">#000000</color>
+  <color name="gray">#EAEAEA</color>
 </resources>

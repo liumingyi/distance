@@ -1,4 +1,4 @@
-package top.liumingyi.distance.ui;
+package top.liumingyi.distance.views;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -67,7 +67,7 @@ public class SlideUpView extends FrameLayout {
     this.extraHeight = extraHeight;
   }
 
-  interface StateChangeListener {
+  public interface StateChangeListener {
     void open();
 
     void closed();

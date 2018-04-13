@@ -15,6 +15,7 @@ import lombok.Getter;
  *
  * 为日期选择器提供固定的数据源
  * 即：年份，月份，日期
+ * Month value is 0-based. e.g., 0 for January.
  *
  * 年份范围为当前年份的前后20年
  *
@@ -131,5 +132,9 @@ public final class DatePickerHelper {
     Calendar calendar = Calendar.getInstance();
     calendar.set(year, monthIndex, day);
     return calendar;
+  }
+
+  public int getYear(int yearIndex) {
+    return Integer.valueOf(years[yearIndex]);
   }
 }

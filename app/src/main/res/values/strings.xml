@@ -33,4 +33,14 @@
   <string name="days_after_dead">已离开%1$d天</string>
   <string name="edit">编辑</string>
   <string name="cancel">取消</string>
+  <string name="today_to_xx">今天距离xx年x月x日有多少天？</string>
+  <string name="my_xx_date">我的第xxx天是？</string>
+  <string name="xx_to_xx">xx年x月x日出生的孩子的第xx天是？</string>
+  <string name="days_between_date">xx年x月x日与yy年y月y日相隔多少天？</string>
+  <string name="my_date">我的第</string>
+  <string name="day">天</string>
+  <string name="is">是</string>
+  <string name="de">的第</string>
+  <string name="and">和</string>
+  <string name="apart">相隔</string>
 </resources>

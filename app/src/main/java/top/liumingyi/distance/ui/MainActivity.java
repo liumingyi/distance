@@ -1,10 +1,14 @@
 package top.liumingyi.distance.ui;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -17,6 +21,7 @@ import top.liumingyi.ciel.views.TRxView;
 import top.liumingyi.distance.R;
 import top.liumingyi.distance.events.CloseUserFormEvent;
 import top.liumingyi.distance.helpers.UserInfoSaver;
+import top.liumingyi.distance.views.SlideUpView;
 
 /**
  * 主页面-管理多个分页
@@ -25,36 +30,37 @@ import top.liumingyi.distance.helpers.UserInfoSaver;
 
 public class MainActivity extends DistanceBaseActivity {
 
-  private static final String TAG_CALCULATE_FRAGMENT = "tag_calculate_fragment";
-  private static final String TAG_USER_FRAGMENT = "tag_user_fragment";
-
-  private static final String TAG_HOME = TAG_CALCULATE_FRAGMENT;
   private static final String TAG_USER_FORM_FRAGMENT = "tag_user_form_fragment";
-
-  private CalculateFragment calculateFragment;
-  private UserFragment userFragment;
 
   @BindView(R.id.slidLayout) SlideUpView slideUpView;
   @BindView(R.id.navigation) BottomNavigationView navigationView;
   @BindView(R.id.toolbar) Toolbar toolbar;
+  @BindView(R.id.viewpager) ViewPager viewPager;
 
   TextView toolbarEditTv;
+
+  int[] navigatorIds = new int[] {
+      R.id.navigation_calculate, R.id.navigation_user
+  };
 
   private BottomNavigationView.OnNavigationItemSelectedListener navigationItemSelectedListener =
       new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override public boolean onNavigationItemSelected(@NonNull MenuItem item) {
           switch (item.getItemId()) {
             case R.id.navigation_calculate:
-              replaceFragment(calculateFragment, R.id.frame_layout, TAG_CALCULATE_FRAGMENT);
+              viewPager.setCurrentItem(MainViewPagerAdapter.CALCULATE_FRAGMENT_INDEX);
               return true;
             case R.id.navigation_user:
-              if (userFragment == null) {
-                userFragment = UserFragment.newInstance();
-              }
-              replaceFragment(userFragment, R.id.frame_layout, TAG_USER_FRAGMENT);
+              viewPager.setCurrentItem(MainViewPagerAdapter.USER_FRAGMENT_INDEX);
               return true;
           }
           return false;
+        }
+      };
+  private ViewPager.OnPageChangeListener pageChangeListener =
+      new ViewPager.SimpleOnPageChangeListener() {
+        @Override public void onPageSelected(int position) {
+          navigationView.setSelectedItemId(navigatorIds[position]);
         }
       };
 
@@ -80,9 +86,15 @@ public class MainActivity extends DistanceBaseActivity {
     initToolbar();
     initNavigationView();
     initSlideUpView();
-    initContentFragments();
+    initViewPager();
     initUserFormFragment();
     checkUserInfo();
+  }
+
+  private void initViewPager() {
+    MainViewPagerAdapter adapter = new MainViewPagerAdapter(getSupportFragmentManager());
+    viewPager.setAdapter(adapter);
+    viewPager.addOnPageChangeListener(pageChangeListener);
   }
 
   private void initSlideUpView() {
@@ -107,19 +119,10 @@ public class MainActivity extends DistanceBaseActivity {
     navigationView.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
   }
 
-  private void initToolbar() {
+  @SuppressLint("CheckResult") private void initToolbar() {
     getLayoutInflater().inflate(R.layout.my_toolbar, toolbar);
     toolbarEditTv = toolbar.findViewById(R.id.toolbar_edit_tv);
-    TRxView.clicks(toolbarEditTv).subscribe(new Consumer<Object>() {
-      @Override public void accept(Object o) throws Exception {
-        slideUpView.toggle();
-      }
-    });
-  }
-
-  private void initContentFragments() {
-    calculateFragment = CalculateFragment.newInstance();
-    addFragment(calculateFragment, R.id.frame_layout, TAG_CALCULATE_FRAGMENT);
+    TRxView.clicks(toolbarEditTv).subscribe(o -> slideUpView.toggle());
   }
 
   private void initUserFormFragment() {
@@ -128,15 +131,13 @@ public class MainActivity extends DistanceBaseActivity {
     fragmentTransaction.add(slideUpView.getId(), userFormFragment, TAG_USER_FORM_FRAGMENT).commit();
   }
 
-  private void checkUserInfo() {
+  @SuppressLint("CheckResult") private void checkUserInfo() {
     if (hasUserInfo()) {
       return;
     }
-    Observable.just("").delay(500, TimeUnit.MILLISECONDS).subscribe(new Consumer<Object>() {
-      @Override public void accept(Object o) throws Exception {
-        slideUpView.up();
-      }
-    });
+    Observable.just("")
+        .delay(500, TimeUnit.MILLISECONDS)
+        .subscribe((Consumer<Object>) o -> slideUpView.up());
   }
 
   private boolean hasUserInfo() {
@@ -147,21 +148,33 @@ public class MainActivity extends DistanceBaseActivity {
   @Override public void onBackPressed() {
     if (slideUpView.isOpen()) {
       slideUpView.down();
-    } else if (isHomePage()) {
-      finish();
     } else {
       super.onBackPressed();
-      navigationView.setSelectedItemId(R.id.navigation_calculate);
     }
   }
 
-  private boolean isHomePage() {
-    FragmentManager fm = getSupportFragmentManager();
-    int count = fm.getBackStackEntryCount();
-    if (count == 0) {
-      return true;
+  private class MainViewPagerAdapter extends FragmentPagerAdapter {
+
+    private static final int FRAGMENT_COUNT = 2;
+
+    private static final int CALCULATE_FRAGMENT_INDEX = 0;
+    private static final int USER_FRAGMENT_INDEX = 1;
+
+    MainViewPagerAdapter(FragmentManager fm) {
+      super(fm);
     }
-    FragmentManager.BackStackEntry lastFragment = fm.getBackStackEntryAt(count - 1);
-    return lastFragment == null || TAG_HOME.equals(lastFragment.getName());
+
+    @Override public Fragment getItem(int position) {
+      if (position == CALCULATE_FRAGMENT_INDEX) {
+        return CalculateFragment.newInstance();
+      } else if (position == USER_FRAGMENT_INDEX) {
+        return UserFragment.newInstance();
+      }
+      return null;
+    }
+
+    @Override public int getCount() {
+      return FRAGMENT_COUNT;
+    }
   }
 }

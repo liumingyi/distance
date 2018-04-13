@@ -1,6 +1,9 @@
 package top.liumingyi.ciel.utils;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -98,5 +101,35 @@ public class TimeUtils {
     //普通年(不能被100整除的年份)能被4整除的为闰年。(如2004年就是闰年,1999年不是闰年)
     //世纪年(能被100整除的年份)能被400整除的是闰年。(如2000年是闰年，1900年不是闰年)
     return (year % 100 != 0 && year % 4 == 0) || (year % 100 == 0 && year % 400 == 0);
+  }
+
+  /**
+   * 是否是二月
+   *
+   * @param month 0~11
+   */
+  public static boolean isFebruary(int month) {
+    return month == 1;
+  }
+
+  /**
+   * 得到目标Calendar
+   *
+   * @param originalCalendar 原始日期
+   * @param dates 原始日期的第xx天,第一天是原始日期
+   */
+  public static Calendar getTargetCalendar(Calendar originalCalendar, int dates) {
+    if (originalCalendar == null || dates <= 0) {
+      return null;
+    }
+    Calendar result = Calendar.getInstance();
+    result.setTime(originalCalendar.getTime());
+    result.add(Calendar.DATE, dates - 1);
+    return result;
+  }
+
+  public static String dateFormat(Calendar calendar) {
+    DateFormat dateFormat = new SimpleDateFormat("yyyy年MM月dd日", Locale.getDefault());
+    return dateFormat.format(calendar.getTime());
   }
 }

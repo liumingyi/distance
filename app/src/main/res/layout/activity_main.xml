@@ -15,8 +15,8 @@
       app:contentInsetStart="0dp"
       />
 
-  <FrameLayout
-      android:id="@+id/frame_layout"
+  <android.support.v4.view.ViewPager
+      android:id="@+id/viewpager"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:layout_above="@id/navigation"
@@ -24,7 +24,7 @@
       android:paddingTop="12dp"
       />
 
-  <top.liumingyi.distance.ui.SlideUpView
+  <top.liumingyi.distance.views.SlideUpView
       android:id="@+id/slidLayout"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
