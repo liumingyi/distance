@@ -41,27 +41,27 @@ public abstract class SharedPreferencesSaver {
     return preferences.getStringSet(key, defValue);
   }
 
-  protected synchronized void save(String key, String value) {
+  protected void save(String key, String value) {
     preferences.edit().putString(key, value).apply();
   }
 
-  protected synchronized void save(String key, int value) {
+  protected void save(String key, int value) {
     preferences.edit().putInt(key, value).apply();
   }
 
-  protected synchronized void save(String key, boolean value) {
+  protected void save(String key, boolean value) {
     preferences.edit().putBoolean(key, value).apply();
   }
 
-  protected synchronized void save(String key, long value) {
+  protected void save(String key, long value) {
     preferences.edit().putLong(key, value).apply();
   }
 
-  protected synchronized void save(String key, float value) {
+  protected void save(String key, float value) {
     preferences.edit().putFloat(key, value).apply();
   }
 
-  protected synchronized void save(String key, Set<String> value) {
+  protected void save(String key, Set<String> value) {
     preferences.edit().putStringSet(key, value).apply();
   }
 

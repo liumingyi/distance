@@ -128,6 +128,16 @@ public class TimeUtils {
     return result;
   }
 
+  public static Calendar getNextDaysCalendar(Calendar originalCalendar, int nextDays) {
+    if (originalCalendar == null || nextDays <= 0) {
+      return null;
+    }
+    Calendar result = Calendar.getInstance();
+    result.setTime(originalCalendar.getTime());
+    result.add(Calendar.DATE, nextDays);
+    return result;
+  }
+
   public static String dateFormat(Calendar calendar) {
     DateFormat dateFormat = new SimpleDateFormat("yyyy年MM月dd日", Locale.getDefault());
     return dateFormat.format(calendar.getTime());

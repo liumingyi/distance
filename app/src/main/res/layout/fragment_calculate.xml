@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
@@ -9,61 +10,38 @@
       android:id="@+id/today_tv"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_centerHorizontal="true"
-      android:layout_marginTop="48dp"
+      android:layout_marginTop="32dp"
       android:textSize="28sp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      />
+
+
+  <top.liumingyi.distance.views.PickerView
+      android:id="@+id/picker_view"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      app:layout_constraintBottom_toTopOf="@id/calculate_btn"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/today_tv"
       />
 
   <Button
       android:id="@+id/calculate_btn"
       android:layout_width="240dp"
       android:layout_height="wrap_content"
-      android:layout_alignParentBottom="true"
-      android:layout_centerHorizontal="true"
-      android:layout_marginBottom="56dp"
+      android:layout_marginBottom="20dp"
       android:background="@drawable/bg_calculate_btn"
       android:text="@string/calculate"
       android:textAllCaps="false"
-      android:textSize="14sp"
-      style="?android:borderlessButtonStyle"
+      android:textSize="13sp"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      style="?android:attr/borderlessButtonStyle"
       />
 
-  <TextView
-      android:id="@+id/apart_days_tv"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_above="@id/calculate_btn"
-      android:layout_centerHorizontal="true"
-      android:layout_marginBottom="30dp"
-      android:textSize="28sp"
-      />
+</android.support.constraint.ConstraintLayout>
 
-  <NumberPicker
-      android:id="@+id/year_picker"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_alignLeft="@+id/today_tv"
-      android:layout_alignStart="@+id/today_tv"
-      android:layout_below="@+id/today_tv"
-      android:layout_marginTop="65dp"
-      />
-
-  <NumberPicker
-      android:id="@+id/month_picker"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_alignTop="@+id/year_picker"
-      android:layout_toEndOf="@+id/year_picker"
-      android:layout_toRightOf="@+id/year_picker"
-      />
-
-  <NumberPicker
-      android:id="@+id/day_picker"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_alignTop="@id/month_picker"
-      android:layout_toEndOf="@id/month_picker"
-      android:layout_toRightOf="@id/month_picker"
-      />
-
-</RelativeLayout>

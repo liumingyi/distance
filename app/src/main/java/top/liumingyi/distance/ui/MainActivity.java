@@ -7,18 +7,19 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.TextView;
 import butterknife.BindView;
 import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import java.util.concurrent.TimeUnit;
 import top.liumingyi.ciel.utils.DensityUtils;
 import top.liumingyi.ciel.views.TRxView;
 import top.liumingyi.distance.R;
+import top.liumingyi.distance.events.AppendEventItemEvent;
 import top.liumingyi.distance.events.CloseUserFormEvent;
 import top.liumingyi.distance.helpers.UserInfoSaver;
 import top.liumingyi.distance.views.SlideUpView;
@@ -31,6 +32,7 @@ import top.liumingyi.distance.views.SlideUpView;
 public class MainActivity extends DistanceBaseActivity {
 
   private static final String TAG_USER_FORM_FRAGMENT = "tag_user_form_fragment";
+  private static final String TAG_APPEND_EVENT_FRAGMENT = "tag_append_event_fragment";
 
   @BindView(R.id.slidLayout) SlideUpView slideUpView;
   @BindView(R.id.navigation) BottomNavigationView navigationView;
@@ -40,18 +42,21 @@ public class MainActivity extends DistanceBaseActivity {
   TextView toolbarEditTv;
 
   int[] navigatorIds = new int[] {
-      R.id.navigation_calculate, R.id.navigation_user
+      R.id.navigation_calculate, R.id.navigation_user, R.id.navigation_events
   };
 
   private BottomNavigationView.OnNavigationItemSelectedListener navigationItemSelectedListener =
       new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override public boolean onNavigationItemSelected(@NonNull MenuItem item) {
           switch (item.getItemId()) {
+            case R.id.navigation_events:
+              viewPager.setCurrentItem(MainViewPagerAdapter.INDEX_EVENTS_FRAGMENT);
+              return true;
             case R.id.navigation_calculate:
-              viewPager.setCurrentItem(MainViewPagerAdapter.CALCULATE_FRAGMENT_INDEX);
+              viewPager.setCurrentItem(MainViewPagerAdapter.INDEX_CALCULATE_FRAGMENT);
               return true;
             case R.id.navigation_user:
-              viewPager.setCurrentItem(MainViewPagerAdapter.USER_FRAGMENT_INDEX);
+              viewPager.setCurrentItem(MainViewPagerAdapter.INDEX_USER_FRAGMENT);
               return true;
           }
           return false;
@@ -67,6 +72,9 @@ public class MainActivity extends DistanceBaseActivity {
   @Override protected void rxBusEventReceive(Object event) {
     if (event instanceof CloseUserFormEvent) {
       slideUpView.down();
+    } else if (event instanceof AppendEventItemEvent) {
+      addAppendEventFragmentToSlideUpView();
+      slideUpView.up();
     }
   }
 
@@ -87,7 +95,6 @@ public class MainActivity extends DistanceBaseActivity {
     initNavigationView();
     initSlideUpView();
     initViewPager();
-    initUserFormFragment();
     checkUserInfo();
   }
 
@@ -109,10 +116,11 @@ public class MainActivity extends DistanceBaseActivity {
 
       @Override public void closed() {
         if (toolbarEditTv != null) {
-          toolbarEditTv.setText(getString(R.string.edit));
+          toolbarEditTv.setText(getString(R.string.setting));
         }
       }
     });
+    addUserFragmentToSlideUpView();
   }
 
   private void initNavigationView() {
@@ -122,13 +130,59 @@ public class MainActivity extends DistanceBaseActivity {
   @SuppressLint("CheckResult") private void initToolbar() {
     getLayoutInflater().inflate(R.layout.my_toolbar, toolbar);
     toolbarEditTv = toolbar.findViewById(R.id.toolbar_edit_tv);
-    TRxView.clicks(toolbarEditTv).subscribe(o -> slideUpView.toggle());
+    TRxView.clicks(toolbarEditTv).subscribe(o -> {
+      addUserFragmentToSlideUpView();
+      slideUpView.toggle();
+    });
   }
 
-  private void initUserFormFragment() {
-    UserFormFragment userFormFragment = UserFormFragment.newInstance();
-    FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-    fragmentTransaction.add(slideUpView.getId(), userFormFragment, TAG_USER_FORM_FRAGMENT).commit();
+  UserFormFragment userFormFragment;
+  AppendEventFragment appendEventFragment;
+
+  private void addUserFragmentToSlideUpView() {
+    if (userFormFragment == null) {
+      userFormFragment = UserFormFragment.newInstance();
+    }
+    FragmentManager fm = getSupportFragmentManager();
+    if (hasEventFragment(fm)) {
+      fm.beginTransaction()
+          .replace(slideUpView.getId(), userFormFragment, TAG_USER_FORM_FRAGMENT)
+          .commit();
+    } else if (!hasUserFragment(fm)) {
+      fm.beginTransaction()
+          .add(slideUpView.getId(), userFormFragment, TAG_USER_FORM_FRAGMENT)
+          .commit();
+    }
+  }
+
+  /**
+   * 存在添加倒计时的fragment
+   */
+  private boolean hasEventFragment(FragmentManager fm) {
+    return fm.findFragmentByTag(TAG_APPEND_EVENT_FRAGMENT) != null;
+  }
+
+  /**
+   * 存在用户信息fragment
+   */
+  private boolean hasUserFragment(FragmentManager fm) {
+    return fm.findFragmentByTag(TAG_USER_FORM_FRAGMENT) != null;
+  }
+
+  private void addAppendEventFragmentToSlideUpView() {
+    if (appendEventFragment == null) {
+      appendEventFragment = AppendEventFragment.newInstance();
+    }
+    FragmentManager fm = getSupportFragmentManager();
+    if (hasUserFragment(fm)) {
+      fm.beginTransaction()
+          .replace(slideUpView.getId(), appendEventFragment, TAG_APPEND_EVENT_FRAGMENT)
+          .commit();
+    } else if (!hasEventFragment(fm)) {
+      fm.beginTransaction()
+          .add(slideUpView.getId(), appendEventFragment, TAG_APPEND_EVENT_FRAGMENT)
+          .commit();
+    }
   }
 
   @SuppressLint("CheckResult") private void checkUserInfo() {
@@ -137,7 +191,10 @@ public class MainActivity extends DistanceBaseActivity {
     }
     Observable.just("")
         .delay(500, TimeUnit.MILLISECONDS)
-        .subscribe((Consumer<Object>) o -> slideUpView.up());
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe((Consumer<Object>) o -> {
+          slideUpView.up();
+        });
   }
 
   private boolean hasUserInfo() {
@@ -155,20 +212,23 @@ public class MainActivity extends DistanceBaseActivity {
 
   private class MainViewPagerAdapter extends FragmentPagerAdapter {
 
-    private static final int FRAGMENT_COUNT = 2;
+    private static final int FRAGMENT_COUNT = 3;
 
-    private static final int CALCULATE_FRAGMENT_INDEX = 0;
-    private static final int USER_FRAGMENT_INDEX = 1;
+    private static final int INDEX_CALCULATE_FRAGMENT = 0;
+    private static final int INDEX_USER_FRAGMENT = 1;
+    private static final int INDEX_EVENTS_FRAGMENT = 2;
 
     MainViewPagerAdapter(FragmentManager fm) {
       super(fm);
     }
 
     @Override public Fragment getItem(int position) {
-      if (position == CALCULATE_FRAGMENT_INDEX) {
+      if (position == INDEX_CALCULATE_FRAGMENT) {
         return CalculateFragment.newInstance();
-      } else if (position == USER_FRAGMENT_INDEX) {
+      } else if (position == INDEX_USER_FRAGMENT) {
         return UserFragment.newInstance();
+      } else if (position == INDEX_EVENTS_FRAGMENT) {
+        return EventsFragment.newInstance();
       }
       return null;
     }

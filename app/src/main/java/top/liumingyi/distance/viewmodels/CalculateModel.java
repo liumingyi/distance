@@ -2,28 +2,19 @@ package top.liumingyi.distance.viewmodels;
 
 import android.arch.lifecycle.MutableLiveData;
 import android.os.Bundle;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Locale;
 import lombok.Getter;
-import lombok.Setter;
 import top.liumingyi.ciel.base.BaseViewModel;
+import top.liumingyi.distance.tools.DateUtils;
 
-public class MainViewModel extends BaseViewModel {
+public class CalculateModel extends BaseViewModel {
 
   @Getter private MutableLiveData<String> todayLiveData = new MutableLiveData<>();
 
-  @Setter @Getter private int calculateToolId;
-
-  public MainViewModel() {
+  public CalculateModel() {
   }
 
   @Override public void init(Bundle bundle) {
-    Calendar calendar = Calendar.getInstance();
-    DateFormat dateFormat = new SimpleDateFormat("yyyy年MM月dd日", Locale.getDefault());
-    String today = dateFormat.format(calendar.getTime());
-    todayLiveData.setValue(today);
+    todayLiveData.setValue(DateUtils.getToday());
   }
 
   @Override public void onStart() {

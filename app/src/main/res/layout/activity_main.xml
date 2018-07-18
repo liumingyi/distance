@@ -21,7 +21,6 @@
       android:layout_height="match_parent"
       android:layout_above="@id/navigation"
       android:layout_below="@id/toolbar"
-      android:paddingTop="12dp"
       />
 
   <top.liumingyi.distance.views.SlideUpView

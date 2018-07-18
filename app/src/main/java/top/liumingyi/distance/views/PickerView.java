@@ -1,6 +1,7 @@
 package top.liumingyi.distance.views;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.support.constraint.ConstraintLayout;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -20,18 +21,19 @@ import top.liumingyi.distance.helpers.DatePickerHelper;
 
 public class PickerView extends ConstraintLayout {
 
-  NumberPicker yearPicker;
-  NumberPicker monthPicker;
-  NumberPicker dayPicker;
-  TextView apartDaysTv;
+  private NumberPicker yearPicker;
+  private NumberPicker monthPicker;
+  private NumberPicker dayPicker;
+  private TextView apartDaysTv;
 
-  WeakReference<Context> context;
+  private WeakReference<Context> context;
 
-  DatePickerHelper helper = new DatePickerHelper();
+  private DatePickerHelper helper = new DatePickerHelper();
 
-  int yearIndex;
-  int monthIndex;//0~11
-  int dayIndex;
+  private int yearIndex;
+  private int monthIndex;//0~11
+  private int dayIndex;
+  private boolean isShowText;
 
   public PickerView(Context context) {
     this(context, null);
@@ -43,10 +45,10 @@ public class PickerView extends ConstraintLayout {
 
   public PickerView(Context context, AttributeSet attrs, int defStyleAttr) {
     super(context, attrs, defStyleAttr);
-    init(context);
+    init(context, attrs);
   }
 
-  private void init(Context context) {
+  private void init(Context context, AttributeSet attrs) {
     this.context = new WeakReference<>(context);
     LayoutInflater layoutInflater =
         (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -54,6 +56,10 @@ public class PickerView extends ConstraintLayout {
       throw new RuntimeException("Error: can not get layout inflater service");
     }
     layoutInflater.inflate(R.layout.picker_layout, this, true);
+
+    TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.PickerView);
+    this.isShowText = typedArray.getBoolean(R.styleable.PickerView_isShowText, true);
+    typedArray.recycle();
   }
 
   @Override protected void onFinishInflate() {
@@ -62,6 +68,11 @@ public class PickerView extends ConstraintLayout {
     monthPicker = findViewById(R.id.month_picker);
     dayPicker = findViewById(R.id.day_picker);
     apartDaysTv = findViewById(R.id.apart_days_tv);
+    if (isShowText) {
+      apartDaysTv.setVisibility(VISIBLE);
+    } else {
+      apartDaysTv.setVisibility(GONE);
+    }
     initPickerData();
     initDatePickerListeners();
   }

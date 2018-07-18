@@ -31,7 +31,7 @@
   <string name="days_before_born">距离出生还有%1$d天</string>
   <string name="today_is_death_day">今日即永恒</string>
   <string name="days_after_dead">已离开%1$d天</string>
-  <string name="edit">编辑</string>
+  <string name="setting">设置</string>
   <string name="cancel">取消</string>
   <string name="today_to_xx">今天距离xx年x月x日有多少天？</string>
   <string name="my_xx_date">我的第xxx天是？</string>
@@ -43,4 +43,11 @@
   <string name="de">的第</string>
   <string name="and">和</string>
   <string name="apart">相隔</string>
+  <string name="title_event">倒计时</string>
+  <string name="event_title">距离: %1$s 还有</string>
+  <string name="next_year">明年</string>
+  <string name="confirm">确认</string>
+  <string name="keyword">关键词</string>
+  <string name="birthday">生日</string>
+  <string name="next_vacation">下个假期</string>
 </resources>
