@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit;
 import top.liumingyi.ciel.utils.DensityUtils;
 import top.liumingyi.ciel.views.TRxView;
 import top.liumingyi.distance.R;
-import top.liumingyi.distance.events.AppendEventItemEvent;
+import top.liumingyi.distance.events.OpenLabelAppendFragmentEvent;
 import top.liumingyi.distance.events.CloseUserFormEvent;
 import top.liumingyi.distance.helpers.UserInfoSaver;
 import top.liumingyi.distance.views.SlideUpView;
@@ -72,7 +72,7 @@ public class MainActivity extends DistanceBaseActivity {
   @Override protected void rxBusEventReceive(Object event) {
     if (event instanceof CloseUserFormEvent) {
       slideUpView.down();
-    } else if (event instanceof AppendEventItemEvent) {
+    } else if (event instanceof OpenLabelAppendFragmentEvent) {
       addAppendEventFragmentToSlideUpView();
       slideUpView.up();
     }
@@ -137,7 +137,7 @@ public class MainActivity extends DistanceBaseActivity {
   }
 
   UserFormFragment userFormFragment;
-  AppendEventFragment appendEventFragment;
+  LabelAppendFragment appendEventFragment;
 
   private void addUserFragmentToSlideUpView() {
     if (userFormFragment == null) {
@@ -171,7 +171,7 @@ public class MainActivity extends DistanceBaseActivity {
 
   private void addAppendEventFragmentToSlideUpView() {
     if (appendEventFragment == null) {
-      appendEventFragment = AppendEventFragment.newInstance();
+      appendEventFragment = LabelAppendFragment.newInstance();
     }
     FragmentManager fm = getSupportFragmentManager();
     if (hasUserFragment(fm)) {
@@ -228,7 +228,7 @@ public class MainActivity extends DistanceBaseActivity {
       } else if (position == INDEX_USER_FRAGMENT) {
         return UserFragment.newInstance();
       } else if (position == INDEX_EVENTS_FRAGMENT) {
-        return EventsFragment.newInstance();
+        return LabelFragment.newInstance();
       }
       return null;
     }

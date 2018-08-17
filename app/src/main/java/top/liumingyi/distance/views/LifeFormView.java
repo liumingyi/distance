@@ -72,7 +72,7 @@ public class LifeFormView extends View {
     borderPaint.setStrokeWidth(dip2px(context, STROKE_WIDTH));
 
     greenPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-    greenPaint.setColor(Color.GREEN);
+    greenPaint.setColor(Color.parseColor("#66d9a9"));
 
     redPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
     redPaint.setColor(Color.RED);

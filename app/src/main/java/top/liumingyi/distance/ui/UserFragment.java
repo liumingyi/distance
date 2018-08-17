@@ -76,7 +76,7 @@ public class UserFragment extends BaseViewModelFragment<UserViewModel> {
       lifeFormView.setVisibility(View.VISIBLE);
       lifeFormView.setTotalYear(lifeFormViewData.totalYear);
       lifeFormView.setProgressYear(lifeFormViewData.progressYear);
-      lifeFormView.invalidate();
+      lifeFormView.requestLayout();
     });
   }
 }

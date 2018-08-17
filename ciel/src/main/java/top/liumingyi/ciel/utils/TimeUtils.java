@@ -17,6 +17,9 @@ public class TimeUtils {
    * 计算两个日期相距的天数
    */
   public static long calculateApartDays(Calendar start, Calendar end) {
+    if (start == null || end == null) {
+      throw new RuntimeException("Calender is Null");
+    }
     if (isBefore(end, start)) {
       return calculateApartDays(end, start);
     }

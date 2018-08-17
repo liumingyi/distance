@@ -34,6 +34,7 @@ public class PickerView extends ConstraintLayout {
   private int monthIndex;//0~11
   private int dayIndex;
   private boolean isShowText;
+  private Calendar selectCalendar;
 
   public PickerView(Context context) {
     this(context, null);
@@ -194,11 +195,31 @@ public class PickerView extends ConstraintLayout {
     setPickerValues(dayPicker, helper.getDays(newYear, month), dayIndex);
   }
 
-  public void calculate() {
-    Calendar target = helper.getCalendar(yearIndex, monthIndex, dayIndex);
+  public long calculate() {
+    selectCalendar = helper.getCalendar(yearIndex, monthIndex, dayIndex);
     Calendar now = Calendar.getInstance();
-    long days = TimeUtils.calculateApartDays(now, target);
-    notifyCalculateResult(days);
+    long days = TimeUtils.calculateApartDays(now, selectCalendar);
+    if (isShowText) {
+      notifyCalculateResult(days);
+    }
+    return days;
+  }
+
+  public long calculateSign() {
+    selectCalendar = helper.getCalendar(yearIndex, monthIndex, dayIndex);
+    Calendar now = Calendar.getInstance();
+    long days = TimeUtils.calculateApartDays(now, selectCalendar);
+    if (isShowText) {
+      notifyCalculateResult(days);
+    }
+    return days;
+  }
+
+  public Calendar getSelectCalendar() {
+    if (selectCalendar == null) {
+      selectCalendar = helper.getCalendar(yearIndex, monthIndex, dayIndex);
+    }
+    return selectCalendar;
   }
 
   /**

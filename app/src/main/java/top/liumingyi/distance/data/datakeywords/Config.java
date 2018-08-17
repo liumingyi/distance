@@ -9,14 +9,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import top.liumingyi.distance.App;
+import top.liumingyi.distance.data.datakeywords.models.DateKeyword;
 
 /**
  * 日期关键字 配置文件
  * 展示支持的关键字
  */
-class Config {
+public class Config {
 
-  private static final String BASE = Config.class.getPackage().getName();
+  private static final String BASE = DateKeyword.class.getPackage().getName();
 
   public static final int KW_NEXT_YEAR = 0;
   public static final int KW_BIRTHDAY = 1;

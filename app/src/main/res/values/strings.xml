@@ -1,7 +1,7 @@
 <resources>
   <string name="app_name">第几天</string>
   <string name="calculate">算一算</string>
-  <string name="apart_days">%1$d&#160;天</string>
+  <string name="apart_days">相隔&#160;%1$d&#160;天</string>
   <string name="is_today">就在今天</string>
   <string name="title_calculate">计算</string>
   <string name="title_account">我</string>
@@ -50,4 +50,5 @@
   <string name="keyword">关键词</string>
   <string name="birthday">生日</string>
   <string name="next_vacation">下个假期</string>
+  <string name="today_title">今天：%1$s</string>
 </resources>

@@ -12,26 +12,11 @@
       android:padding="16dp"
       >
 
-    <LinearLayout
-        android:id="@+id/keyword_layout"
+    <top.liumingyi.distance.views.tagview.TagLayout
+        android:id="@+id/tag_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        >
-
-      <TextView
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:text="@string/keyword"
-          android:textColor="@color/black"
-          />
-
-      <android.support.v7.widget.RecyclerView
-          android:id="@+id/keyword_recycler"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          />
-    </LinearLayout>
+        />
 
     <top.liumingyi.distance.views.PickerView
         android:id="@+id/picker_view"
@@ -41,7 +26,7 @@
         app:isShowText="false"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/keyword_layout"
+        app:layout_constraintTop_toBottomOf="@id/tag_layout"
         />
 
 

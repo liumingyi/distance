@@ -28,7 +28,9 @@ public class CalculateFragment extends BaseViewModelFragment<CalculateModel> {
   }
 
   @Override protected void dataBinding() {
-    viewModel.getTodayLiveData().observe(this, today -> todayTv.setText(today));
+    viewModel.getTodayLiveData()
+        .observe(this,
+            today -> todayTv.setText(String.format(getString(R.string.today_title), today)));
   }
 
   @Override public int getLayoutResID() {
