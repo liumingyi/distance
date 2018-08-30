@@ -8,10 +8,10 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.internal.schedulers.IoScheduler;
 import java.util.List;
 import lombok.Getter;
-import top.liumingyi.ciel.base.BaseViewModel;
 import top.liumingyi.distance.App;
 import top.liumingyi.distance.data.Label;
 import top.liumingyi.distance.helpers.LabelSaver;
+import top.liumingyi.tang.base.BaseViewModel;
 
 public class LabelViewModel extends BaseViewModel {
 

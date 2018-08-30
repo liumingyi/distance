@@ -2,18 +2,19 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
   <item
-      android:id="@+id/navigation_calculate"
-      android:icon="@drawable/ic_home_black_24dp"
-      android:title="@string/title_calculate"/>
+      android:id="@+id/navigation_labels"
+      android:icon="@mipmap/ic_countdown"
+      android:title="@string/title_event"/>
+
 
   <item
       android:id="@+id/navigation_user"
-      android:icon="@drawable/ic_dashboard_black_24dp"
+      android:icon="@mipmap/ic_user"
       android:title="@string/title_account"/>
 
   <item
-      android:id="@+id/navigation_events"
-      android:icon="@drawable/ic_home_black_24dp"
-      android:title="@string/title_event"/>
+      android:id="@+id/navigation_calculate"
+      android:icon="@mipmap/ic_calculate"
+      android:title="@string/title_calculate"/>
 
 </menu>

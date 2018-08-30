@@ -1,5 +1,5 @@
 <resources>
-  <string name="app_name">第几天</string>
+  <string name="app_name">几天了</string>
   <string name="calculate">算一算</string>
   <string name="apart_days">相隔&#160;%1$d&#160;天</string>
   <string name="is_today">就在今天</string>

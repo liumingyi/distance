@@ -4,12 +4,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 import butterknife.BindView;
-import top.liumingyi.ciel.base.BaseViewModelFragment;
 import top.liumingyi.distance.R;
 import top.liumingyi.distance.data.User;
 import top.liumingyi.distance.events.UpdateUserInfoEvent;
 import top.liumingyi.distance.viewmodels.UserViewModel;
 import top.liumingyi.distance.views.LifeFormView;
+import top.liumingyi.tang.base.BaseViewModelFragment;
 
 /**
  * 个人信息

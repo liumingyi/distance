@@ -3,8 +3,8 @@ package top.liumingyi.distance.viewmodels;
 import android.arch.lifecycle.MutableLiveData;
 import android.os.Bundle;
 import lombok.Getter;
-import top.liumingyi.ciel.base.BaseViewModel;
 import top.liumingyi.distance.tools.DateUtils;
+import top.liumingyi.tang.base.BaseViewModel;
 
 public class CalculateModel extends BaseViewModel {
 

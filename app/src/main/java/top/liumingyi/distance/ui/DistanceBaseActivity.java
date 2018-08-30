@@ -5,8 +5,8 @@ import android.support.annotation.RequiresApi;
 import android.support.v4.content.ContextCompat;
 import android.view.Window;
 import android.view.WindowManager;
-import top.liumingyi.ciel.base.BaseActivity;
 import top.liumingyi.distance.R;
+import top.liumingyi.tang.base.BaseActivity;
 
 public abstract class DistanceBaseActivity extends BaseActivity {
 

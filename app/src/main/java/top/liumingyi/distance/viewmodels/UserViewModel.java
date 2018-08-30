@@ -4,9 +4,9 @@ import android.arch.lifecycle.MutableLiveData;
 import android.content.Context;
 import android.os.Bundle;
 import lombok.Getter;
-import top.liumingyi.ciel.base.BaseViewModel;
 import top.liumingyi.distance.data.User;
 import top.liumingyi.distance.repositories.UserRepository;
+import top.liumingyi.tang.base.BaseViewModel;
 
 /**
  * ViewModel For UserFragment{@link top.liumingyi.distance.ui.UserFragment}

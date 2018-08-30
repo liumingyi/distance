@@ -6,13 +6,13 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import butterknife.BindView;
-import top.liumingyi.ciel.base.BaseRecyclerViewAdapter;
-import top.liumingyi.ciel.base.BaseViewModelFragment;
 import top.liumingyi.distance.R;
 import top.liumingyi.distance.adapters.LabelRecyclerAdapter;
 import top.liumingyi.distance.data.Label;
 import top.liumingyi.distance.events.LabelAddedEvent;
 import top.liumingyi.distance.viewmodels.LabelViewModel;
+import top.liumingyi.tang.base.BaseRecyclerViewAdapter;
+import top.liumingyi.tang.base.BaseViewModelFragment;
 
 /**
  * 倒计时事件页面

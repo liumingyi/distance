@@ -6,8 +6,8 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-import top.liumingyi.ciel.utils.SharedPreferencesSaver;
 import top.liumingyi.distance.data.Label;
+import top.liumingyi.tang.utils.SharedPreferencesSaver;
 
 public class LabelSaver extends SharedPreferencesSaver {
 

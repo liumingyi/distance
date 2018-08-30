@@ -8,12 +8,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import java.util.Calendar;
-import top.liumingyi.ciel.RxBus;
-import top.liumingyi.ciel.base.BaseRecyclerViewAdapter;
-import top.liumingyi.ciel.utils.TimeUtils;
 import top.liumingyi.distance.R;
 import top.liumingyi.distance.data.Label;
 import top.liumingyi.distance.events.OpenLabelAppendFragmentEvent;
+import top.liumingyi.tang.RxBus;
+import top.liumingyi.tang.base.BaseRecyclerViewAdapter;
+import top.liumingyi.tang.utils.TimeUtils;
 
 public class LabelRecyclerAdapter extends BaseRecyclerViewAdapter<RecyclerView.ViewHolder, Label> {
 

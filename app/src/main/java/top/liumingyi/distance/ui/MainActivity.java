@@ -16,13 +16,13 @@ import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import java.util.concurrent.TimeUnit;
-import top.liumingyi.ciel.utils.DensityUtils;
-import top.liumingyi.ciel.views.TRxView;
 import top.liumingyi.distance.R;
-import top.liumingyi.distance.events.OpenLabelAppendFragmentEvent;
 import top.liumingyi.distance.events.CloseUserFormEvent;
+import top.liumingyi.distance.events.OpenLabelAppendFragmentEvent;
 import top.liumingyi.distance.helpers.UserInfoSaver;
 import top.liumingyi.distance.views.SlideUpView;
+import top.liumingyi.tang.utils.DensityUtils;
+import top.liumingyi.tang.views.TRxView;
 
 /**
  * 主页面-管理多个分页
@@ -42,15 +42,15 @@ public class MainActivity extends DistanceBaseActivity {
   TextView toolbarEditTv;
 
   int[] navigatorIds = new int[] {
-      R.id.navigation_calculate, R.id.navigation_user, R.id.navigation_events
+      R.id.navigation_labels, R.id.navigation_user, R.id.navigation_calculate
   };
 
   private BottomNavigationView.OnNavigationItemSelectedListener navigationItemSelectedListener =
       new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override public boolean onNavigationItemSelected(@NonNull MenuItem item) {
           switch (item.getItemId()) {
-            case R.id.navigation_events:
-              viewPager.setCurrentItem(MainViewPagerAdapter.INDEX_EVENTS_FRAGMENT);
+            case R.id.navigation_labels:
+              viewPager.setCurrentItem(MainViewPagerAdapter.INDEX_LABEL_FRAGMENT);
               return true;
             case R.id.navigation_calculate:
               viewPager.setCurrentItem(MainViewPagerAdapter.INDEX_CALCULATE_FRAGMENT);
@@ -192,9 +192,7 @@ public class MainActivity extends DistanceBaseActivity {
     Observable.just("")
         .delay(500, TimeUnit.MILLISECONDS)
         .observeOn(AndroidSchedulers.mainThread())
-        .subscribe((Consumer<Object>) o -> {
-          slideUpView.up();
-        });
+        .subscribe((Consumer<Object>) o -> slideUpView.up());
   }
 
   private boolean hasUserInfo() {
@@ -214,9 +212,9 @@ public class MainActivity extends DistanceBaseActivity {
 
     private static final int FRAGMENT_COUNT = 3;
 
-    private static final int INDEX_CALCULATE_FRAGMENT = 0;
+    private static final int INDEX_CALCULATE_FRAGMENT = 2;
     private static final int INDEX_USER_FRAGMENT = 1;
-    private static final int INDEX_EVENTS_FRAGMENT = 2;
+    private static final int INDEX_LABEL_FRAGMENT = 0;
 
     MainViewPagerAdapter(FragmentManager fm) {
       super(fm);
@@ -227,7 +225,7 @@ public class MainActivity extends DistanceBaseActivity {
         return CalculateFragment.newInstance();
       } else if (position == INDEX_USER_FRAGMENT) {
         return UserFragment.newInstance();
-      } else if (position == INDEX_EVENTS_FRAGMENT) {
+      } else if (position == INDEX_LABEL_FRAGMENT) {
         return LabelFragment.newInstance();
       }
       return null;

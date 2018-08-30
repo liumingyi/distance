@@ -7,12 +7,12 @@ import android.widget.EditText;
 import butterknife.BindView;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxTextView;
-import top.liumingyi.ciel.RxBus;
-import top.liumingyi.ciel.base.BaseViewModelFragment;
-import top.liumingyi.ciel.utils.ToastUtils;
 import top.liumingyi.distance.R;
 import top.liumingyi.distance.events.CloseUserFormEvent;
 import top.liumingyi.distance.viewmodels.UserFormViewModel;
+import top.liumingyi.tang.RxBus;
+import top.liumingyi.tang.base.BaseViewModelFragment;
+import top.liumingyi.tang.utils.ToastUtils;
 
 /**
  * 用户信息表格-用户填写个人信息
@@ -32,7 +32,7 @@ public class UserFormFragment extends BaseViewModelFragment<UserFormViewModel> {
   }
 
   @Override protected UserFormViewModel initInjector() {
-    return new UserFormViewModel(getContext());
+    return new UserFormViewModel();
   }
 
   @Override protected int getLayoutResID() {

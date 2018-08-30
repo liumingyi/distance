@@ -1,17 +1,16 @@
 package top.liumingyi.distance.viewmodels;
 
 import android.arch.lifecycle.MutableLiveData;
-import android.content.Context;
 import android.os.Bundle;
-import java.lang.ref.WeakReference;
 import java.util.Calendar;
 import lombok.Getter;
-import top.liumingyi.ciel.RxBus;
-import top.liumingyi.ciel.base.BaseViewModel;
-import top.liumingyi.ciel.utils.TimeUtils;
+import top.liumingyi.distance.App;
 import top.liumingyi.distance.data.User;
 import top.liumingyi.distance.events.UpdateUserInfoEvent;
 import top.liumingyi.distance.helpers.UserInfoSaver;
+import top.liumingyi.tang.RxBus;
+import top.liumingyi.tang.base.BaseViewModel;
+import top.liumingyi.tang.utils.TimeUtils;
 
 /**
  * ViewModel for{@link top.liumingyi.distance.ui.UserFormFragment}
@@ -43,10 +42,7 @@ public class UserFormViewModel extends BaseViewModel {
   private int date;
   private int wishAge;
 
-  private WeakReference<Context> context;
-
-  public UserFormViewModel(Context context) {
-    this.context = new WeakReference<>(context);
+  public UserFormViewModel() {
   }
 
   @Override public void init(Bundle bundle) {
@@ -58,7 +54,7 @@ public class UserFormViewModel extends BaseViewModel {
   }
 
   private User fetchUserInfo() {
-    UserInfoSaver userInfoSaver = new UserInfoSaver(context.get());
+    UserInfoSaver userInfoSaver = new UserInfoSaver(App.getContext());
     return userInfoSaver.getUserInfo();
   }
 
@@ -90,7 +86,7 @@ public class UserFormViewModel extends BaseViewModel {
 
   private void saveUserInfo() {
     new Thread(() -> {
-      UserInfoSaver saver = new UserInfoSaver(context.get());
+      UserInfoSaver saver = new UserInfoSaver(App.getContext());
       User user = new User(year, month, date, wishAge);
       saver.saveUserInfo(user);
       callbackLiveData.setValue(TAG_USERINFO_SUBMITTED);

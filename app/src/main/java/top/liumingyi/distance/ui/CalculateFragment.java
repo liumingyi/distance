@@ -5,11 +5,11 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
 import butterknife.BindView;
-import top.liumingyi.ciel.base.BaseViewModelFragment;
-import top.liumingyi.ciel.views.TRxView;
 import top.liumingyi.distance.R;
 import top.liumingyi.distance.viewmodels.CalculateModel;
 import top.liumingyi.distance.views.PickerView;
+import top.liumingyi.tang.base.BaseViewModelFragment;
+import top.liumingyi.tang.views.TRxView;
 
 public class CalculateFragment extends BaseViewModelFragment<CalculateModel> {
 

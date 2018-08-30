@@ -2,8 +2,8 @@ package top.liumingyi.distance.helpers;
 
 import android.content.Context;
 import com.google.gson.Gson;
-import top.liumingyi.ciel.utils.SharedPreferencesSaver;
 import top.liumingyi.distance.data.User;
+import top.liumingyi.tang.utils.SharedPreferencesSaver;
 
 /**
  * 用户信息存储器

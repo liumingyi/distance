@@ -10,9 +10,9 @@ import android.widget.TextView;
 import java.lang.ref.WeakReference;
 import java.util.Arrays;
 import java.util.Calendar;
-import top.liumingyi.ciel.utils.TimeUtils;
 import top.liumingyi.distance.R;
 import top.liumingyi.distance.helpers.DatePickerHelper;
+import top.liumingyi.tang.utils.TimeUtils;
 
 /**
  * 计算与今天相距多少天的控件

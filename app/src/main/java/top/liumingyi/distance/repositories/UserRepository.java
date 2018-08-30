@@ -4,11 +4,11 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import java.lang.ref.WeakReference;
 import java.util.Calendar;
-import top.liumingyi.ciel.utils.TimeUtils;
 import top.liumingyi.distance.R;
 import top.liumingyi.distance.data.User;
 import top.liumingyi.distance.helpers.UserInfoSaver;
 import top.liumingyi.distance.viewmodels.UserViewModel;
+import top.liumingyi.tang.utils.TimeUtils;
 
 /**
  * 为{@link top.liumingyi.distance.viewmodels.UserViewModel}提供数据

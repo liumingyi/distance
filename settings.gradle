@@ -1,1 +1,4 @@
-include ':app',':ciel'
+include ':app',':Tang'
+
+project(':Tang').projectDir = new File(settingsDir,'../Tang/base')
+
